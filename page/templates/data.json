@@ -1,0 +1,6 @@
+{
+  "pagename":"首页",
+  "cssFile" : ["<%= dirname %>.css"],
+  "jsFile" : ["<%= dirname %>.js"],
+  "pageid" : "<%= dirname %>"
+}
