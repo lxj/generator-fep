@@ -1,0 +1,104 @@
+/**
+ * User:louxiaojian
+ * Date:2014-08-25
+ * Mail:jxsr_lxj@163.com
+ */
+	
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td
+	padding:0;margin:0
+
+body
+	font:12px/22px "\5FAE\8F6F\96C5\9ED1",Tahoma,Verdana
+	word-break break-all
+	background #0a0a0a
+	color #fff
+
+ul,li
+	list-style:none
+
+cite,em,address
+	font-style:normal
+
+input,select,textarea
+	font:normal normal 14px "Verdana";color:#333;outline:none;/*去除Opera浏览器这些标签的默认样式*/
+
+textarea,input[type|="text"],input[type|="password"]
+	-webkit-appearance:none/*去除webkit浏览器这些标签的默认样式*/
+
+textarea
+	resize:none
+
+h1,h2,h3,h4,h5,h6
+	font-size:14px
+
+img
+	border:0;
+	vertical-align:top
+
+/*==通用链接==*/
+a{color:#333;text-decoration:none;outline:none}
+a:hover{color:#333;text-decoration:underline;outline:none}
+.blod a,.blod{font-weight:bold}
+.blue a,.blue{color:#06c}
+.red a,.red{color:#f03}
+.or a,.or{color:#f60}
+.green a,.green{color:#390}
+a.blod,a.blod:link,a.blod:visited{font-weight:bold}
+a.red,a.red:link,a.red:visited{color:#f03}
+a.blue,a.blue:link,a.blue:visited{color:#06c}
+a.or,a.or:link,a.or:visited{color:#f60}
+a.green,a.green:link,a.green:visited{color:#390}
+/* 字体属性 [定义规则，小写f加属性名称] */
+.fB{font-weight:bold}
+.fI{font-style:italic}
+/* 字体大小*/
+.f12px{font-size:12px}
+.f14px{font-size:14px}
+/* 浮动*/
+.fl{float:left}
+.fr{float:right}
+/* 其它属性*/
+fieldset{border:none}
+.center{text-align:center}
+.mid{vertical-align:middle}
+.fwn{font-weight:normal}
+.hide{display:none}
+.submit{cursor:pointer;border:0}
+.noText{display:block;height:0;width:0;line-height:0;overflow:hidden}
+/*==clear==*/
+.clear{clear:both;font-size:0px;width:0px;height:0;visibility:hidden;line-height:0}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+* html>body .clearfix{display:inline-block;width:100%}
+* html .clearfix{/* Hides from IE-mac \*/height:1%;/* End hide from IE-mac */}
+/* ie7 hack*/
+*+html .clearfix{min-height:1%;}
+.clear{overflow:hidden;_zoom:1}
+/*==collr==*/
+.collr,.collr .colr{overflow:hidden;zoom:1}
+.collr .coll{float:left;_margin-right:-3px}
+.collr .coll img{vertical-align:top}
+/*==/collr==*/
+.weaken,.ignore{color:#909090}/*弱化*/
+.stress{color:#f00}/*强调*/
+.pitch{margin-bottom:10px}
+/*==table==*/
+.table ul{overflow:hidden;zoom:1}
+.table li{float:left;overflow:hidden}
+.table .head{font-weight:bold}
+
+#bd
+	width 1002px
+	margin 0 auto
+	padding-bottom 10px
+
+.crumb
+	zoom:1;font-family:'\5B8B\4F53';color:#0a6bb8
+	.crumb a,
+	.crumb a:hover{color:#0a6bb8;text-decoration:none;}
+
+.icon
+	display inline-block
+	font-size 0
+	color transparent!important
+	line-height 0
+	overflow hidden

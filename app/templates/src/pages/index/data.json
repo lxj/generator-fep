@@ -1,0 +1,6 @@
+{
+  "pagename":"首页",
+  "cssFile" : ["index.css"],
+  "jsFile" : ["index.js"],
+  "pageid" : "index"
+}
