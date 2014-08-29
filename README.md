@@ -12,8 +12,8 @@ you shouldn't see this error anymore.
 ## Commands
 
 * `yo fep` shows a wizard for generating a new generator
-* `yo fep:page` NAME` generates a page with the name NAME
-* `yo fep:mod` NAME` generates a mod with the name NAME
+* `yo fep:page` NAME generates a page with the name NAME
+* `yo fep:mod` NAME generates a mod with the name NAME
 
 
 ## What do you get?
