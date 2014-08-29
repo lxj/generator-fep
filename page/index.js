@@ -26,6 +26,7 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
     this.dest.mkdir(pagedir+'/img');
     this.src.copy('demo.jade', pagedir + '/'+this.dirname+'.jade');
     this.src.copy('demo.styl', pagedir + '/'+this.dirname+'.styl');
+    this.src.copy('demo.js', pagedir + '/'+this.dirname+'.js');
     this.template('data.json', pagedir + '/data.json');
   }
 });

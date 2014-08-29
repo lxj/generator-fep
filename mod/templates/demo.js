@@ -5,7 +5,3 @@
  * module for <%= dirname %>
  */
 
-
-/**
- * <%= dirname %> end
- */
