@@ -101,7 +101,28 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       this.dest.mkdir('build/pages');
       this.dest.mkdir('build/'+this.appname+'_assets');
       this.dest.mkdir('src');
-      //this.src.copy('src/**', 'src/');
+      this.dest.mkdir('src/mods');
+      this.dest.mkdir('src/mods/global');
+      this.dest.mkdir('src/mods/global/img');
+      this.src.copy('src/mods/global/global.styl', 'src/mods/global/global.styl');
+      this.src.copy('src/mods/global/global.js', 'src/mods/global/global.js');
+      this.dest.mkdir('src/mods/header');
+      this.dest.mkdir('src/mods/header/img');
+      this.src.copy('src/mods/header/header.jade', 'src/mods/header/header.jade');
+      this.src.copy('src/mods/header/header.styl', 'src/mods/header/header.styl');
+      this.src.copy('src/mods/header/header.js', 'src/mods/header/header.js');
+      this.dest.mkdir('src/mods/footer');
+      this.dest.mkdir('src/mods/footer/img');
+      this.src.copy('src/mods/footer/footer.jade', 'src/mods/footer/footer.jade');
+      this.src.copy('src/mods/footer/footer.styl', 'src/mods/footer/footer.styl');
+      this.src.copy('src/mods/footer/footer.js', 'src/mods/footer/footer.js');
+      this.dest.mkdir('src/pages');
+      this.dest.mkdir('src/pages/index');
+      this.dest.mkdir('src/pages/index/img');
+      this.src.copy('src/pages/index/index.jade', 'src/pages/index/index.jade');
+      this.src.copy('src/pages/index/index.styl', 'src/pages/index/index.styl');
+      this.src.copy('src/pages/index/index.js', 'src/pages/index/index.js');
+      this.src.copy('src/pages/index/data.json','src/pages/index/data.json');
       this.superb = superb();
     }
   },
