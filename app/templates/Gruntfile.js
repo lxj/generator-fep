@@ -1,6 +1,7 @@
 'use strict';
 
-var fs = require("fs");
+var fs = require("fs"),
+    timestamp = new Date().getTime();
 
 function extand(target, source) {
   for (var p in source) {
@@ -15,9 +16,10 @@ module.exports = function(grunt) {
 
   //grunt.file.defaultEncoding = 'gbk';
   var siteConfig={
+    livereload : 35729,
     static :{
-      timestamp: "<%= new Date().getTime() %>",
-      ver: '?' + new Date().getTime(),
+      timestamp: timestamp,
+      ver: '?' + timestamp,
       mods : "../../mods",
       images : "../../images",
       css : "../../<%= appname %>_assets/1.0/css",
@@ -36,7 +38,7 @@ module.exports = function(grunt) {
       options: {
         port: 9000,
         hostname: '*', // IP，localhost 或域名
-        livereload: 35729//watch 监听的端口,
+        livereload: siteConfig.livereload//watch 监听的端口,
       },
       server: {
         options: {
@@ -99,7 +101,7 @@ module.exports = function(grunt) {
     cssmin: {
       target: {
         options: {
-          banner: '/* build by grunt cssmin at <%= new Date() %> */'
+          banner: '/* build by grunt cssmin at '+grunt.template.today("yyyy-mm-dd HH:MM:ss") +' */'
         },
         files:[{
           expand: true,
@@ -110,7 +112,7 @@ module.exports = function(grunt) {
     compress: {
       main: {
         options: {
-          archive: 'build'+new Date().getTime()+'.zip',
+          archive: 'build'+grunt.template.today("yyyymmdd-HH-MM-ss")+'.zip',
           pretty : true
         },
         files: [
@@ -189,7 +191,7 @@ module.exports = function(grunt) {
     watch: {
       livereload :{
         options: {
-          livereload: '<%=connect.options.livereload%>'  //监听前面声明的端口  35729
+          livereload: siteConfig.livereload  //监听前面声明的端口  35729
         },
         files: [  //下面文件的改变就会实时刷新网页
           'build/**/*'
@@ -227,7 +229,7 @@ module.exports = function(grunt) {
     grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
   });
 
-  grunt.registerTask('default', ['connect:server','clean','copy','jade','stylus','watch']);
+  grunt.registerTask('default', ['connect:server','clean:static','copy','jade','stylus','watch']);
   grunt.registerTask('youhua', ['imagemin','uglify','cssmin']);
   grunt.registerTask('build','打包发布', function(){
     grunt.log.writeln("打包发布中.......")
