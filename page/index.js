@@ -83,8 +83,8 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
 
   writing: function () {
     var cwd = this.env.cwd,
-        cwdMatch = cwd.match(/.+(?:\/|\\)pages(?:$|(?:\/|\\))/),
-        pagedir = (cwdMatch ? cwdMatch[0] : cwd+'/pages')+'/'+this.dirname;
+        cwdMatch = cwd.match(/.+(?:\/|\\)src(?:$|(?:\/|\\))/),
+        pagedir = (cwdMatch ? cwdMatch[0] : (cwd+'/src'))+'/pages/'+this.dirname;
 
     this.dest.mkdir(pagedir);
     this.dest.mkdir(pagedir+'/img');
