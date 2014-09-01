@@ -2,8 +2,6 @@
 var path = require('path');
 var url = require('url');
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
 var npmName = require('npm-name');
 var superb = require('superb');
 
@@ -48,7 +46,6 @@ var today = function(tpl){
 var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
   
   initializing: function (){
-    this.pkg = require('../package.json');
     this.currentYear = new Date().getFullYear();
     this.appbegintime = today();
   },
@@ -170,8 +167,27 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
   },
 
   end: function () {
-    if (!this.options['skip-install']) {
-      this.npmInstall();
-    }
+
+    var done = this.async();
+    this.prompt([
+        {
+            name   : 'npm_install',
+            message: 'Install node_modules for grunt now?',
+            default: 'N/y',
+            warning: ''
+        }
+    ], function (props) {
+        this.npm_install = (/^y/i).test(props.npm_install);
+        if (this.npm_install) {
+            this.npmInstall('', {}, function (err) {
+                console.log('\n\nnpm was installed successful. \n\n');
+            });
+        } else {
+            console.log('\n\nplease run "npm install" before grunt\n');
+        }
+        done();
+    }.bind(this));
+
   }
+
 });
