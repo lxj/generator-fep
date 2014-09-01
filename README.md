@@ -2,8 +2,12 @@
 
 ## Getting started
 
-- Install: `npm install -g generator-fep`
-- Run: `yo fep`
+1. Install: `npm install -g yo`
+2. Install: `npm install -g yeoman-generator`
+3. Install: `npm install -g generator-fep`
+4. Install: `npm install -g grunt`
+5. Install: `npm install -g grunt-cli`
+6. Run: `yo fep`
 
 to your `.bashrc`, `.zshrc`, `.profile` or another file that is run on shell initialization. In new terminal shells
 you shouldn't see this error anymore.
