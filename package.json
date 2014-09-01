@@ -1,6 +1,6 @@
 {
   "name": "generator-fep",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Generator fep for Yeoman",
   "keywords": [
     "yeoman",
@@ -9,8 +9,8 @@
     "generator",
     "fep"
   ],
-  "homepage": "https://github.com/lxj/",
-  "bugs": "https://github.com/yeoman/generator-generator/issues",
+  "homepage": "https://github.com/lxj/generator-fep",
+  "bugs": "https://github.com/lxj/generator-fep/issues",
   "author": {
     "name": "louxiaojian",
     "email": "louxiaojian@gmail.com",
@@ -23,6 +23,7 @@
     "url": "https://github.com/lxj/generator-fep.git"
   },
   "scripts": {
+    "test": "mocha"
   },
   "dependencies": {
     "npm-name": "^1.0.1",
@@ -42,9 +43,5 @@
     {
       "type": "MIT"
     }
-  ],
-  "files": [
-    "app",
-    "subgenerator"
   ]
 }
