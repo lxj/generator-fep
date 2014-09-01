@@ -62,8 +62,12 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       var prompts = [
         {
           name: 'generatorName',
-          message: 'What\'s the name of your generator?',
+          message: 'Project Name:?',
           default: generatorName
+        },
+        {
+          name: 'staticAsset',
+          message: '静态资源文件存放:?'
         },
         {
           name: 'user',
@@ -101,6 +105,7 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
 
         this.generatorName = props.generatorName;
         this.appname = this.generatorName;
+        this.staticAsset = props.staticAsset || this.appname+'_assets';
         this.user = props.user
         this.mail = props.mail
         done();
@@ -136,7 +141,7 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       this.dest.mkdir('build');
       this.dest.mkdir('build/images');
       this.dest.mkdir('build/pages');
-      this.dest.mkdir('build/'+this.appname+'_assets');
+      this.dest.mkdir('build/'+this.staticAsset);
       this.dest.mkdir('src');
       this.dest.mkdir('src/mods');
       this.dest.mkdir('src/mods/global');
