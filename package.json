@@ -1,23 +1,26 @@
 {
   "name": "generator-fep",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Generator fep for Yeoman",
   "keywords": [
+    "yeoman",
+    "yo",
     "yeoman-generator",
     "generator",
     "fep"
   ],
-  "homepage": "https://github.com/lxj/generator-fep",
+  "homepage": "https://github.com/lxj/",
   "bugs": "https://github.com/yeoman/generator-generator/issues",
   "author": {
     "name": "louxiaojian",
     "email": "louxiaojian@gmail.com",
     "url": "https://github.com/lxj/"
   },
+  "readmeFilename": "README.md",
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lxj/generator-fep"
+    "url": "https://github.com/lxj/generator-fep.git"
   },
   "scripts": {
   },
