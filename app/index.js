@@ -21,13 +21,36 @@ var extractGeneratorName = function (_, appname) {
   }
   return slugged;
 };
+var today = function(tpl){
+    var date = new Date(),
+        tmp = {
+          "year":"getFullYear",
+          "month":"getMonth",
+          "day":"getDate",
+          "hour":"getHours",
+          "minute":"getMinutes",
+          "second":"getSeconds"
+        },
+        cache = [],
+        addZero = function(nub){
+          var nub = parseInt(nub);
+          return nub < 10 ? ("0"+nub) : nub;
+        },
+        tpl = tpl || "yyyy-mm-dd HH:MM:ss";
 
+        for(var key in tmp){
+          cache[key] = addZero(key==="month" ? (date[tmp[key]]()+1) : date[tmp[key]]());
+        }
+
+    return tpl.replace(/yyyy/g,cache.year).replace(/mm/g,cache.month).replace(/dd/g,cache.day).replace(/HH/g,cache.hour).replace(/MM/g,cache.minute).replace(/ss/g,cache.second);
+};
 
 var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
-  initializing: function () {
+  
+  initializing: function (){
     this.pkg = require('../package.json');
-    this.currentYear = (new Date()).getFullYear();
-    this.appbegintime = new Date().toString();
+    this.currentYear = new Date().getFullYear();
+    this.appbegintime = today();
   },
 
   prompting: {
@@ -36,27 +59,40 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       var done = this.async();
       var generatorName = extractGeneratorName(this._, this.appname);
 
-      var prompts = [{
-        name: 'generatorName',
-        message: 'What\'s the name of your generator?',
-        default: generatorName
-      }, {
-        type: 'confirm',
-        name: 'pkgName',
-        message: 'The name above already exists on npm, choose another?',
-        default: true,
-        when: function (answers) {
-          var done = this.async();
-          var name = answers.generatorName;
-          npmName(name, function (err, available) {
-            if (!available) {
-              done(true);
-            }
+      var prompts = [
+        {
+          name: 'generatorName',
+          message: 'What\'s the name of your generator?',
+          default: generatorName
+        },
+        {
+          name: 'user',
+          message: 'Author Name(你的名字拼音或英文名):',
+          default: "louxiaojian"
+        }, 
+        {
+          name: 'mail',
+          message: 'Author Email:',
+          default: "louxiaojian@gmal.com"
+        },
+        {
+          type: 'confirm',
+          name: 'pkgName',
+          message: 'The name above already exists on npm, choose another?',
+          default: true,
+          when: function (answers) {
+            var done = this.async();
+            var name = answers.generatorName;
+            npmName(name, function (err, available) {
+              if (!available) {
+                done(true);
+              }
 
-            done(false);
-          });
+              done(false);
+            });
+          }
         }
-      }];
+      ];
 
       this.prompt(prompts, function (props) {
         if (props.pkgName) {
@@ -65,7 +101,8 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
 
         this.generatorName = props.generatorName;
         this.appname = this.generatorName;
-
+        this.user = props.user
+        this.mail = props.mail
         done();
       }.bind(this));
     }
@@ -120,8 +157,8 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       this.dest.mkdir('src/pages/index');
       this.dest.mkdir('src/pages/index/img');
       this.src.copy('src/pages/index/index.jade', 'src/pages/index/index.jade');
-      this.src.copy('src/pages/index/index.styl', 'src/pages/index/index.styl');
-      this.src.copy('src/pages/index/index.js', 'src/pages/index/index.js');
+      this.template('src/pages/index/index.styl', 'src/pages/index/index.styl');
+      this.template('src/pages/index/index.js', 'src/pages/index/index.js');
       this.src.copy('src/pages/index/data.json','src/pages/index/data.json');
       this.superb = superb();
     }
