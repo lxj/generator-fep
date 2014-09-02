@@ -64,7 +64,8 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
         },
         {
           name: 'staticAsset',
-          message: '静态资源文件存放:?'
+          message: '静态资源文件存放:?',
+          default :generatorName+'_assets'
         },
         {
           name: 'user',
@@ -96,24 +97,26 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       ];
 
       this.prompt(prompts, function (props) {
+
         if (props.pkgName) {
           return this.prompting.askForGeneratorName.call(this);
         }
-
         this.generatorName = props.generatorName;
         this.appname = this.generatorName;
-        this.staticAsset = props.staticAsset || this.appname+'_assets';
+        this.staticAsset = props.staticAsset;
         this.user = props.user
         this.mail = props.mail
         done();
+        
       }.bind(this));
     }
   },
 
   configuring: {
     enforceFolderName: function () {
+    //this.destinationRoot() //E:\louxiaojian\usr\Desktop\yeoman\bigtrue
       if (this.appname !== this._.last(this.destinationRoot().split(path.sep))) {
-        this.destinationRoot(this.appname);
+        //this.destinationRoot(this.appname);E:\louxiaojian\usr\Desktop\yeoman\bigtrue\ji
       }
       this.config.save();
     }
