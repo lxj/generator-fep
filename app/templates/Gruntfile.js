@@ -251,11 +251,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['connect:server','clean:static','copy','jade','stylus','watch']);
   grunt.registerTask('build', ['imagemin','stylus','uglify','cssmin']);
+  grunt.registerTask('zip', ['clean:compress','compress']);
   grunt.registerTask('publish','打包发布', function(){
     grunt.log.writeln("\n打包发布中.......".green)
     siteConfig.cdn = "<%= cdn %>";
     grunt.log.writeln(("cdn地址为:"+siteConfig.cdn).green)
     //grunt.task.run(['clean', 'copy']);
-    grunt.task.run(['clean:compress','compress','stylus','replace']);
+    grunt.task.run(['stylus','replace']);
   });
 };
