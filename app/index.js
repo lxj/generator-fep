@@ -65,7 +65,7 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
         {
           name: 'projectVersion',
           message: 'Project Version:?',
-          default: '1.0'
+          default: '0.0.1'
         },
         {
           name: 'staticAsset',
