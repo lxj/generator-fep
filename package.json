@@ -28,7 +28,8 @@
   "dependencies": {
     "npm-name": "^1.0.1",
     "superb": "^1.0.0",
-    "yeoman-generator": "^0.17.3"
+    "yeoman-generator": "^0.17.3",
+    "iconv-lite":"~0.4.4"
   },
   "devDependencies": {
   },

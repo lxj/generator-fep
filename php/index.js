@@ -1,5 +1,6 @@
 'use strict';
 var yeoman = require('yeoman-generator');
+var iconv = require('iconv-lite');
 
 var today = function(tpl){
     var date = new Date(),
@@ -127,5 +128,9 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
     this.template('config.json', 'config.json');
     this.template('index.php', 'index.php');
     this.template('README.md', 'README.md');
+  },
+  end : function(){
+    //iconv.encode("Sample input string", 'gbk');
+    console.log("\n请把config.json编码转为gbk，否则程序运行有错\n")
   }
 });
