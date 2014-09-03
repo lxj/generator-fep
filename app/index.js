@@ -69,8 +69,13 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
         },
         {
           name: 'staticAsset',
-          message: '静态资源文件存放:?',
+          message: '静态资源文件存放:',
           default :generatorName+'_assets'
+        },
+        {
+          name: 'cdn',
+          message: 'cdn地址:',
+          default :'http://image1.webscache.com/kan/'
         },
         {
           name: 'user',
@@ -110,6 +115,7 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
         this.projectVersion = pros.projectVersion;
         this.appname = this.generatorName;
         this.staticAsset = props.staticAsset;
+        this.cdn = props.cdn;
         this.user = props.user
         this.mail = props.mail
         done();

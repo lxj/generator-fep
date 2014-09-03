@@ -1,7 +1,7 @@
 'use strict';
 
 var fs = require("fs"),
-    timestamp = new Date().getTime();
+    timestamp = grunt.template.today("yyyymmdd-HH-MM-ss");
 
 function extand(target, source) {
   for (var p in source) {
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     livereload : 35729,
     static :{
       timestamp: timestamp,
-      ver: '?' + timestamp,
+      ver: timestamp,
       mods : "../../mods",
       images : "../../images",
       css : "../../<%= staticAsset %>/<%= projectVersion %>/css",
@@ -145,8 +145,8 @@ module.exports = function(grunt) {
         options: {
           patterns: [
             {
-              match: /(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)[?"')]+/ig, //url("../img/png24.png?v=version")
-              replacement: '$1http://www.pps.com$3pppp'
+              match: /(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)(\?*[^"')]+)/ig, 
+              replacement: '$1'+(siteConfig.cdn || '$2')+'$3?version='+siteConfig.static.ver
             }
           ]
         },
@@ -252,7 +252,9 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['connect:server','clean:static','copy','jade','stylus','watch']);
   grunt.registerTask('build', ['imagemin','stylus','uglify','cssmin']);
   grunt.registerTask('publish','打包发布', function(){
-    grunt.log.writeln("打包发布中.......")
+    grunt.log.writeln("\n打包发布中.......".green)
+    siteConfig.cdn = "<%= cdn %>";
+    grunt.log.writeln(("cdn地址为:"+siteConfig.cdn).green)
     //grunt.task.run(['clean', 'copy']);
     grunt.task.run(['clean:compress','compress','stylus','replace']);
   });
