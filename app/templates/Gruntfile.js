@@ -1,7 +1,6 @@
 'use strict';
 
-var fs = require("fs"),
-    timestamp = grunt.template.today("yyyymmdd-HH-MM-ss");
+var fs = require("fs");
 
 function extand(target, source) {
   for (var p in source) {
@@ -15,6 +14,7 @@ function extand(target, source) {
 module.exports = function(grunt) {
 
   //grunt.file.defaultEncoding = 'gbk';
+  var timestamp = grunt.template.today("yyyymmdd-HH-MM-ss");
   var siteConfig={
     livereload : 35729,
     static :{
