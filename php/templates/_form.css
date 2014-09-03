@@ -1,0 +1,47 @@
+/**
+ * User: <%= user%>
+ * Date: <%= appbegintime%>
+ * Mail: <%= mail%>
+ */
+
+
+/*
+ *.oer => .other
+ *.lb => .label
+ *.ft => .title
+ **/
+.form-item{overflow:hidden;zoom:1;vertical-align:top}
+.form-item .ft,
+.form-item .oer,
+.form-item .e-input,
+.form-item .lb,
+.form-item .select,
+.form-item .correct,
+.form-item .wrong,
+.form-item .attention{float:left;margin-right:5px}
+    .form-item .ft{margin:0}
+    .form-item .e-input{border-left:1px solid #d3d6cb;border-top:1px solid #d3d6cb;border-right:1px solid #f2f2f2;border-bottom:1px solid #f2f2f2;height:17px;padding:3px 0 3px 3px;overflow:hidden;line-height:18px;font-family:Verdana,Geneva,sans-serif}
+    .form-item .oer{white-space:nowrap;}
+    .form-item .select{margin-top:2px}
+    .form-agree,.form-act{overflow:hidden;zoom:1}
+    .form-agree .rck{margin-top:5px}
+/*
+ *form end
+ **/
+
+/*===表单错误，正确，注意三种提示样式===*/
+.correct .b,.wrong .b,.attention .b,.correct .tjt,.wrong .tjt{background-image:url(../../open_asset/core/img/ico.png?v=version);background-repeat:no-repeat}
+.correct,.wrong,.attention{position:relative;display:inline-block;padding:0 5px 0 20px;background-repeat:no-repeat;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;line-height:20px}
+    .correct .tjt,.wrong .tjt{width:9px;height:6px;overflow:hidden;position:absolute;left:6px;top:-6px}
+    .correct .b,.wrong .b,.attention .b{position:absolute;width:12px;height:12px;left:5px;top:50%;margin-top:-6px}
+    .correct{color:#358330;background-color:#e9f5e7;border:1px solid #c0e4ba}
+    .correct .tjt{background-position:-112px -16px}
+    .correct .b{background-position:-80px -16px}
+
+    .attention{color:#404040;background-color:#E5F5FF;border:1px solid #40B3FF}
+    .attention .b{width:14px;height:14px;margin-top:-7px;background-position:-96px -16px}
+
+    .wrong{color:#cc0000;background-color:#ffebdf;border:1px solid #e5a99b}
+    .wrong .tjt{background-position:-112px -22px}
+    .wrong .b{width:14px;height:14px;margin-top:-7px;background-position:-64px -16px}
+/*===/表单错误，正确，注意三种提示样式===*/

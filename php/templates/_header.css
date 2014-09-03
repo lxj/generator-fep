@@ -1,0 +1,18 @@
+/**
+ * User: <%= user%>
+ * Date: <%= appbegintime%>
+ * Mail: <%= mail%>
+ */
+
+#hd{position:relative;overflow:hidden;zoom:1;padding:12px 0 0 9px;margin-bottom:7px}
+
+.logo{width:251px;height:54px;overflow:hidden}
+
+.quick-nav{overflow:hidden;position:absolute;right:0;top:10px}
+    .quick-nav .qn-item{float:left;padding:0 10px;background-position:-324px 6px;margin-left:-1px}
+    .quick-nav .qna,.quick-nav .qna:hover{color:#5b6a85;display:inline-block;vertical-align:top}
+    .quick-nav .ico{vertical-align:top;margin:3px 5px 0 0;cursor:pointer}
+    .quick-nav .qn-i{display:inline-block;vertical-align:top;cursor:pointer;}
+
+
+

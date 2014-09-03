@@ -80,7 +80,13 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       }.bind(this));
     }
   },
-
+  configuring: {
+    enforceFolderName: function () {
+        //console.log(this.destinationRoot())
+        //this.destinationRoot(this.appname);
+        //this.config.save();
+    }
+  },
   writing: function () {
     var cwd = this.env.cwd,
         cwdMatch = cwd.match(/.+(?:\/|\\)src(?:$|(?:\/|\\))/),

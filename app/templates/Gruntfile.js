@@ -22,14 +22,14 @@ module.exports = function(grunt) {
       ver: '?' + timestamp,
       mods : "../../mods",
       images : "../../images",
-      css : "../../<%= staticAsset %>/1.0/css",
-      img : "../../<%= staticAsset %>/1.0/img",
-      js : "../../<%= staticAsset %>/1.0/js"
+      css : "../../<%= staticAsset %>/<%= projectVersion %>/css",
+      img : "../../<%= staticAsset %>/<%= projectVersion %>/img",
+      js : "../../<%= staticAsset %>/<%= projectVersion %>/js"
     },
     build:{
-      css : "build/<%= staticAsset %>/1.0/css",
-      img : "build/<%= staticAsset %>/1.0/img",
-      js : "build/<%= staticAsset %>/1.0/js"
+      css : "build/<%= staticAsset %>/<%= projectVersion %>/css",
+      img : "build/<%= staticAsset %>/<%= projectVersion %>/img",
+      js : "build/<%= staticAsset %>/<%= projectVersion %>/js"
     }
   }
 

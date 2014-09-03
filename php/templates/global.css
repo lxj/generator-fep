@@ -1,0 +1,142 @@
+/**
+ * User: <%= user%>
+ * Date: <%= appbegintime%>
+ * Mail: <%= mail%>
+ */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}
+body{font:12px/22px Arial,"宋体";word-break:break-all;text-align:center;color:#383838;background:#f2f5f9 url(../../tg_asset/core/img/body.jpg?v=version) repeat-x}
+fieldset,img{border:none 0} 
+table {border-collapse:collapse;border-spacing:0} 
+ol,li,ul{list-style:none}
+address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal}
+caption,th{text-align:left}
+h1,h2,h3,h4,h5,h6{font-size:100%} 
+q:before,q:after{content:''}
+abbr,acronym{border:0;font-variant:normal}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+input,select,textarea{color:#383838;font:normal normal 12px "Verdana";outline:none;/*去除Opera浏览器这些标签的默认样式*/}
+input,textarea,select{*font-size:100%}
+textarea,input[type|="text"],input[type|="password"]{-webkit-appearance:none/*去除webkit浏览器这些标签的默认样式*/}
+textarea{resize:none}
+/* 字体属性 [定义规则，小写f加属性名称] */
+.fB{font-weight:bold}
+.fI{font-style:italic}
+/* 字体大小*/
+.fs12{font-size:12px}
+.fs14{font-size:14px}
+.mr10{margin-right:10px}
+.ml10{margin-left:10px}
+.mt10{margin-top:10px}
+.mb10{margin-bottom:10px}
+/* 浮动*/
+.fl{float:left}
+.fr{float:right}
+/* 其它属性*/
+.tal{text-align:left!important}
+.hide{display:none}
+.module{zoom:1}
+/*table*/
+.table li{float:left;overflow:hidden;}
+.table ul{overflow:hidden;zoom:1}
+/*lrBx*/
+.lrbx{zoom:1}
+.lrbx:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.lrBx,.lrBx .rbx{overflow:hidden;zoom:1}
+.lrBx .lbx{float:left;_margin-right:-3px}
+.lrBx .lbx img{vertical-align:top}
+/*.lrBx .rbx{padding-left:10px}*/
+/*==clear==*/
+.clear{overflow:hidden;zoom:1}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+* html>body .clearfix {display: inline-block;width:100%}
+* html .clearfix{/* Hides from IE-mac \*/height: 1%;/* End hide from IE-mac */}
+/* ie7 hack*/
+*+html .clearfix {min-height:1%}
+.clearboth{float:none;height:0px;font-size:0px;line-height:0px;overflow:hidden;clear:both}
+.pitch{margin-bottom:15px}/*间距*/
+.stress{color:#f00}
+.ignore{color:#909090}
+.or{color:#ff5400}
+
+.table{padding: 0;border-collapse: collapse;border-spacing: 0;}
+    .table tr{background-color:#FFFFFF;border-top: 1px solid #CCCCCC;margin: 0;padding: 0;}
+    .table tr:nth-child(2n){background-color:#eef3f7;}
+    .table .nth-child-2n{background-color:#eef3f7;}
+    .table tr th{font-weight:bold;}
+    .table tr th, .table tr td {border:1px solid #CCCCCC;margin:0;text-align:left;padding:0 5px}
+    .table tr th > *:first-child,.table tr td > *:first-child{margin-top:0;}
+    .table tr th > *:last-child,.table tr td > *:last-child {margin-bottom:0;}
+
+a{color:#5b6a85;text-decoration:none;outline:none}
+a:hover{color:#5b6a85;text-decoration:underline}
+
+.ico{width:16px;height:16px;display:inline-block;overflow:hidden;line-height:0;font-size:0;border:0;color:transparent!important;background-image:url(../../tg_asset/core/img/ico.png?v=version);background-repeat:no-repeat;}
+    /*.ico-file{background-position:-81px 0}*/
+    /*.ico-movie{background-position:-128px -16px}*/
+    /*.ico-comment,.ico-playdata{width:13px;height:13px;}*/
+    /*.ico-comment{background-position:0 -32px}*/
+    /*.ico-playdata{background-position:-144px -16px}*/
+    /*.ico-ser{background-position:0 0}*/
+    /*.ico-move{background-position:-16px 0}*/
+    /*.ico-edit{background-position:-32px 0}*/
+    /*.ico-dele{background-position:-48px 0}*/
+    /*.ico-set{background-position:-64px 0}*/
+    /*.ico-new{background-position:0 -16px}*/
+    /*.ico-asc,.ico-desc,.ico-hasc,.ico-hdesc{width:10px;height:13px;cursor:pointer}*/
+    /*.ico-asc{background-position:-115px -2px}*//*递增*/
+    /*.ico-desc{background-position:-130px -2px}*//*递减*/
+    /*.ico-hasc{background-position:-146px -2px}*//*灰色递减*/
+    /*.ico-hdesc{background-position:-48px -16px}*//*灰色递减*/
+    /*.ico-s,.ico-x,.ico-hs,.ico-hx{width:10px;height:6px;cursor:pointer}*/
+    /*.ico-s{background-position:-19px -18px}*/
+    /*.ico-x{background-position:-19px -25px}*/
+    /*.ico-hs{background-position:-35px -18px}*/
+    /*.ico-hx{background-position:-35px -25px}*/
+    .ico-help{background-position:-16px -32px}
+    .ico-user,.ico-paswd{width:19px;height:22px}
+    .ico-user{background-position:-121px -32px}
+    .ico-paswd{background-position:-141px -32px}
+
+.img_250_65{vertical-align:top}
+    .img_250_65{width:250px;height:65px}
+
+#page{background:url(../../tg_asset/core/img/page.jpg?v=version) center top no-repeat}
+
+#hd,#bd{width:950px;margin:0 auto;text-align:left}
+
+#bd{height:auto!important;height:380px;min-height:380px;margin-bottom:10px;padding-top:10px}
+
+.crumb{background-image:url(../../tg_asset/core/img/btn.png?v=version);background-repeat:no-repeat}
+    .crumb{background-position:0 -99px;background-repeat:repeat-x;height:29px;line-height:29px;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0;background-color:#f5f5f5;padding-left:10px;font-weight:normal;}
+    .crumb .ms{color:#909090;display:inline-block; margin-right:1px}
+    .crumb .g-but{margin-top:2px}
+    .crumb .new-g-but9{margin-top:1px}
+
+.p-cols{zoom:1}
+    .p-cols:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .p-cols .p-col1{width:100%;float:left}
+    .p-cols .p-col2,.p-cols .p-col3{float:left}
+    .p-cols .p-col2{margin-left:-100%}
+    .new-p-cols .p-col1-1{margin-right:250px}
+    .new-p-cols .p-col3{width:230px;margin-left:-240px}
+    .new-p-cols2 .p-col1-1{margin-right:476px}
+    .new-p-cols2 .p-col3{width:420px;margin-left:-420px}
+    .new-p-cols3 .p-col1-1{margin-left:217px}
+    .new-p-cols3 .p-col2{width:202px;margin-left:-100%}
+
+.p-list{zoom:1;text-align:center}
+    .p-list:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .p-list .p-item{float:left;display:inline;padding-bottom:6px;position:relative;overflow:hidden}
+    .p-list .p-item img{vertical-align:top;padding:2px}
+
+
+.rck{width:13px;height:13px;float:left;margin-right:3px;_margin-right:0}
+
+.p-item .t{height:18px;line-height:18px;overflow:hidden;}
+
+
+
+
+

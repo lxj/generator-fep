@@ -63,6 +63,11 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
           default: generatorName
         },
         {
+          name: 'projectVersion',
+          message: 'Project Version:?',
+          default: '1.0'
+        },
+        {
           name: 'staticAsset',
           message: '静态资源文件存放:?',
           default :generatorName+'_assets'
@@ -102,6 +107,7 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
           return this.prompting.askForGeneratorName.call(this);
         }
         this.generatorName = props.generatorName;
+        this.projectVersion = pros.projectVersion;
         this.appname = this.generatorName;
         this.staticAsset = props.staticAsset;
         this.user = props.user

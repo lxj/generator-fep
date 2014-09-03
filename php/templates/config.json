@@ -1,0 +1,33 @@
+{
+    "name":"<%= projectName %>",
+    "debug" : "1",
+    "complete" : "0",
+    "charset" : "utf-8",
+    "route" : {
+        "index" : {"filename" : "index/index.html", "title" : "首页","pageName"  : "index" },
+        "playModule":{
+            "moduleName":"播放模块",
+            "list":{
+                "index2" : {"filename" : "index/index.html", "title" : "首页","pageName"  : "index" }
+             }
+        }
+    },
+    "webconfig" :[
+        {
+            "version" : "2",
+            "id" : "1" ,
+            "common" : {
+                "jquery.js?top=1":["/app/js/src/jquery1.7.1.js"],
+                "pageName.css" : ["module/global/global.css","module/global/_btn.css","module/global/_form.css"]
+            },
+            "htmlfile" : "module/",
+            "corefile" : "<%= staticAsset %>/core/<%= projectVersion %>/css",
+            "jsfile" : "<%= staticAsset %>/core/<%= projectVersion %>/js",
+            "img" : "<%= staticAsset %>/core/<%= projectVersion %>/img",
+            "images" : "images",
+            "cdn" : "http://image1.webscache.com/kan/"
+        }
+    ]
+}
+
+

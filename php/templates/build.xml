@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="FOR PPS" default="initialize">
+    <property name="module" value="module"/>
+    <property name="asset" value="<%= staticAsset %>"/>
+    <property name="asset_core" value="<%= staticAsset %>/core/<%= projectVersion %>"/>
+    <property name="js" value="<%= staticAsset %>/core/<%= projectVersion %>/js"/>
+    <property name="css" value="<%= staticAsset %>/core/<%= projectVersion %>/css"/>
+    <property name="img" value="<%= staticAsset %>/core/<%= projectVersion %>/img"/>
+    <property name="cdn_img" value="../img/"/>
+    <property name="charset" value="gbk"/>
+    <property name="version" value="20130809"/>
+    <property name="version2" value="20130809"/><!-- 针对单个背景图片路径版本更新-->
+    <import file="\app\build\macros\base.xml"/>
+
+    <target name="concat_css">
+        <delete>
+            <fileset dir="<%= $ %>{css}" includes="**/index.css" ></fileset>
+            <fileset dir="<%= $ %>{js}" includes="**/index.js" ></fileset>
+        </delete>
+        <echo>concat css js begin</echo>
+
+	<echo>concat css js end</echo>
+    </target>
+
+
+    <import file="\app\build\macros\action.xml"/>
+    <target name="initialize">
+        <buildAction asset="<%= $ %>{asset}" charset="<%= $ %>{charset}" assetCore="<%= $ %>{asset_core}" modulePath="<%= $ %>{module}" assetImg="<%= $ %>{img}" timestampsRegexp="(.+)<%= staticAsset %>(.+)" />
+    </target>
+</project>

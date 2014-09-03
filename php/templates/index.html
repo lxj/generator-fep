@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title><?=$title;?></title>
+</head>
+<body id="index">
+    <div id="page">
+        <?php $this->HtmlModule(array('html'=>'header/_header.html'));?>
+        <!--bd-->
+        <div id="bd">
+
+            <!--new-p-cols2-->
+            <div class="new-p-cols2 p-cols">
+                <div class="p-col1">
+                    <div class="p-col1-1">
+
+                        <!--login-->
+                        <div id="login" class="lgbx">
+                            <div class="hd"><h2 class="h"><span class="logh ht">用户登录</span></h2><b class="lock-icon"></b></div>
+                            <div class="bd login-form">
+                                <ul class="form-list">
+                                    <li class="form-item">
+                                        <label class="ft">用户名</label>
+                                        <span class="ys-input"><span class="ys-inner"><input type="text" value="请输入真实姓名" class="e-input" onfocus="this.className.indexOf('onfocus-input')==-1 && (this.className+=' onfocus-input');this.value='';" /></span><b class="ico-user ico"></b></span>
+                                    </li>
+                                    <li class="form-item">
+                                        <label class="ft">密&nbsp;&nbsp;码</label>
+                                        <span class="ys-input"><span class="ys-inner"><input type="text" value="请输入动态令牌" class="e-input" /></span><b class="ico-paswd ico"></b></span>
+                                    </li>
+                                </ul>
+                                <div class="form-act"><input type="submit" value="登录" class="tijiao-but" /></div>
+                            </div>
+                        </div>
+                        <!--/login-->
+
+                    </div>
+                </div>
+                <div class="p-col3">
+                    <!--zhuce-->
+                    <div id="zhuce" class="lgbx">
+                        <div class="hd"><h2 class="h"><span class="regh ht">用户注册</span></h2><b class="notepad-icon"></b></div>
+                        <div class="bd login-form">
+                            <ul class="form-list">
+                                <li class="form-item">
+                                    <label class="ft">用户名</label>
+                                    <span class="ys-input"><span class="ys-inner"><input type="text" value="请输入真实姓名" class="e-input" onfocus="this.className.indexOf('onfocus-input')==-1 && (this.className+=' onfocus-input');this.value='';" /></span><b class="ico-user ico"></b></span>
+                                </li>
+                                <li class="form-item">
+                                    <label class="ft">密&nbsp;&nbsp;码</label>
+                                    <span class="ys-input"><span class="ys-inner"><input type="text" value="请输入动态令牌" class="e-input" /></span><b class="ico-paswd ico"></b></span>
+                                </li>
+                                <li class="form-item">
+                                    <label class="ft">确认密码</label>
+                                    <span class="ys-input"><span class="ys-inner"><input type="text" value="请输入动态令牌" class="e-input" /></span><b class="ico-paswd ico"></b></span>
+                                </li>
+                            </ul>
+                            <div class="form-act"><input type="submit" value="登录" class="zhuce-but" /></div>
+                        </div>
+                    </div>
+                    <!--/zhuce-->
+                </div>
+            </div>
+            <!--/new-p-cols2-->
+
+        </div>
+        <!--/bd-->
+        <?php $this->HtmlModule(array('html'=>'footer/_footer.html'));?>
+    </div>
+
+</body>
+</html>

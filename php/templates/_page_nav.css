@@ -1,0 +1,19 @@
+/**
+ * User: <%= user%>
+ * Date: <%= appbegintime%>
+ * Mail: <%= mail%>
+ */
+
+
+/*page-nav*/
+.page-nav .pn,.page-nav .sp{background:url(../../tg_asset/core/img/btn.png?v=version) no-repeat;}
+    .page-nav{font-size:0;line-height:0;overflow:hidden;font-family:"宋体";text-align:center;padding:10px 0;}
+    .page-nav .pn,.page-nav .sp{line-height:21px;font-size:12px;display:inline-block;vertical-align:top;color:#383838;text-decoration:none;overflow:hidden;}
+    .page-nav .pn{background-position:-298px -158px;margin:0 2px;padding-left:2px}
+    .page-nav .sp{padding:0 9px 0 5px;background-position:right -158px;cursor:pointer;margin-right:-2px}
+    .page-nav .on, .page-nav .on .sp{background:none}
+    .page-nav .on .sp {cursor:text;}
+    .page-nav a:hover{text-decoration:none}
+    .page-nav .ys{width:26px;height:15px;line-height:15px;font-size:12px;border-top:1px solid #c4c7bd;border-left:1px solid #d2d5ca;border-right:1px solid #efefef;border-bottom:1px solid #efefef;padding:2px 0;text-align:center;color:#383838;margin:0 3px;font-family:"宋体";vertical-align:top;_margin-top:-1px}
+    .page-nav .all{background:none;margin:0 3px}
+    .page-nav .nb,.page-nav .nb .sp,.page-nav .on,.page-nav .on .sp{background:none}

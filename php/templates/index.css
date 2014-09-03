@@ -1,0 +1,53 @@
+/**
+ * User: <%= user%>
+ * Date: <%= appbegintime%>
+ * Mail: <%= mail%>
+ */
+
+#index #page{background:url(../../tg_asset/core/img/login/login.jpg?v=version) center top no-repeat}
+#index #hd{margin-bottom: 92px;}
+.ys-input,.ys-inner{background:url(../../tg_asset/core/img/global.png?v=version) no-repeat}
+
+.tijiao-but,
+.zhuce-but,
+.lgbx .hd,
+.lgbx .ht,
+.lock,
+.lock-icon,
+.notepad-icon{background:url(../../tg_asset/core/img/login/login.png?v=version) no-repeat}
+
+.new-p-cols2 .p-col1-1{margin-left:45px}
+
+.lock-icon{width:73px;height:88px;background-position:0 -31px}
+.notepad-icon{width:94px;height:88px;background-position:-74px -31px}
+
+.lgbx{position:relative;zoom:1}
+    .lgbx .hd{height:30px;background-position:0 0}
+    .lgbx .hd:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .lgbx .h{float:left;border-bottom:2px solid #718cac;padding-bottom:7px}
+    .lgbx .ht{display:block;height:20px;text-indent:-9999px;background-position:-282px -31px;overflow:hidden;}
+    .lgbx .lock-icon{position:absolute;top:-46px;left:260px}
+    .lgbx .notepad-icon{position:absolute;top:-35px;left:260px}
+    .lgbx .logh{width:78px}
+    .lgbx .regh{width:99px;background-position:-361px -31px}
+    .lgbx .bd{zoom:1;padding-top:35px}
+
+.ys-input{position:relative;height:35px;background-position:right -54px;padding-right:30px}
+    .ys-input,.ys-inner{display:block;}
+    .ys-inner{height:35px;background-position:left -54px;padding-left:10px}
+    .ys-input .ico{position:absolute;top:6px;right:7px}
+
+.login-form{padding-left:42px}
+    .login-form .form-item{padding-bottom:31px;line-height:35px}
+    .login-form .ft{width:62px;font-size:14px}
+    .login-form .ys-input{width:192px;float:left}
+    .login-form .e-input{width:100%;height:18px;line-height:18px;border:0;padding:0;overflow:hidden;margin:8px 0 0 0;font-size:14px;color:#909090}
+    .login-form .onfocus-input{color:#383838}
+    .login-form .form-act{padding-left:62px;line-height:38px}
+
+.tijiao-but,.zhuce-but{display:block;width:112px;height:38px;border:0;background-position:-169px -31px;text-indent:-9999px;cursor:pointer}
+.zhuce-but{background-position:-169px -69px;}
+
+#zhuce .login-form .form-item{padding-bottom:9px}
+    #zhuce .login-form .ft{text-align:right;margin-right:7px}
+    #zhuce .login-form .form-act{padding-left:69px;}

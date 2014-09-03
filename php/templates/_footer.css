@@ -1,0 +1,10 @@
+/**
+ * User: <%= user%>
+ * Date: <%= appbegintime%>
+ * Mail: <%= mail%>
+ */
+
+
+#ft{text-align:center;border-top:1px solid #aeb9cd}
+    #ft .ft-inner{padding:20px 0 40px;border-top:1px solid #ffffff;zoom:1}
+    #ft,#ft a{color:#aeb9cd}

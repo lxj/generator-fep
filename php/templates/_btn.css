@@ -1,0 +1,38 @@
+/**
+ * User: <%= user%>
+ * Date: <%= appbegintime%>
+ * Mail: <%= mail%>
+ */
+
+
+/*==g-but==*/
+.g-but,
+.g-but .b{background:url(../../tg_asset/core/img/btn.png?v=version) no-repeat}
+.g-but{display:inline-block;line-height:26px;height:26px;overflow:hidden;font-family:'\5B8B\4F53';vertical-align:top;text-align:center;background-position:-298px -26px;margin:0 1px}
+    .g-but:hover{text-decoration:none!important}
+    .g-but .b{display:inline-block;padding:0 12px 0 8px;margin:0 -2px 0 2px;cursor:pointer;vertical-align:top;background-position:right -26px;color:#fff;text-shadow:1px 1px 1px #333;}
+    .new-g-but,.new-g-but4{background-position:-298px 0}
+    .new-g-but .b,.new-g-but4 .b{background-position:right 0;color:#383838;text-shadow:1px 1px 1px #fff;}
+    .new-g-but2{background-position:-298px -52px;line-height:25px;height:25px;}
+    .new-g-but2 .b{background-position:right -52px;color:#fff}
+    .new-g-but3{line-height:22px;height:22px;background-position:-298px -77px}
+    .new-g-but3 .b{background-position:right -77px;color:#383838;text-shadow:1px 1px 1px #fff;}
+    .new-g-but4 .b{color:#909090;text-shadow:1px 1px 1px #fff;}
+
+    .new-g-but5,.new-g-but6{line-height:25px;height:25px;}
+    .new-g-but5{background-position:-296px -179px;}
+    .new-g-but5 .b{background-position:right -179px;color:#fff;padding:0 10px 0 2px;margin:0 -4px 0 4px;}
+    .new-g-but6{background-position:-297px -204px;}
+    .new-g-but6 .b{background-position:right -204px;color:#383838;padding:0 9px 0 3px;margin:0 -3px 0 3px;text-shadow:1px 1px 1px #fff;}
+
+    .new-g-but7{background-position:-296px -229px;line-height:35px;height:35px;}
+    .new-g-but7 .b{background-position:right -229px;color:#fff;padding:0 10px 0 2px;margin:0 -4px 0 4px;font-size:14px;font-weight:normal;}
+
+    .new-g-but8{background-position:-293px -265px;height:50px;}
+    .new-g-but8 .b{background-position:right -265px;color:#fff;padding:0 17px 0 3px;margin:0 -7px 0 7px;height:50px;line-height:48px;font-size:24px;font-family:'\5FAE\8F6F\96C5\9ED1';}
+
+    .new-g-but9{background-position:-297px -314px;}
+    .new-g-but9 .b{background-position:right -314px;color:#FFF;padding:0 9px 0 3px;margin:0 -3px 0 3px;text-shadow:1px 1px 1px #333;}
+
+/*==/g-but==*/
+
