@@ -112,8 +112,8 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
           return this.prompting.askForGeneratorName.call(this);
         }
         this.generatorName = props.generatorName;
-        this.projectVersion = pros.projectVersion;
         this.appname = this.generatorName;
+        this.projectVersion = props.projectVersion;
         this.staticAsset = props.staticAsset;
         this.cdn = props.cdn;
         this.user = props.user
