@@ -140,6 +140,25 @@ module.exports = function(grunt) {
         }
       }
     },
+    replace: {
+      dist: {
+        options: {
+          patterns: [
+            {
+              match: /(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)[?"')]+/ig, //url("../img/png24.png?v=version")
+              replacement: '$1http://www.pps.com$3pppp'
+            }
+          ]
+        },
+        files: [
+          {
+            expand: true, 
+            src: ['build/**/*.css'], 
+            dest: '.'
+          }
+        ]
+      }
+    },
     jade: {
       compile: {
           files: [{
@@ -224,16 +243,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-replace');
 
   grunt.event.on('watch', function(action, filepath, target) {
     grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
   });
 
   grunt.registerTask('default', ['connect:server','clean:static','copy','jade','stylus','watch']);
-  grunt.registerTask('youhua', ['imagemin','uglify','cssmin']);
-  grunt.registerTask('build','打包发布', function(){
+  grunt.registerTask('build', ['imagemin','stylus','uglify','cssmin']);
+  grunt.registerTask('publish','打包发布', function(){
     grunt.log.writeln("打包发布中.......")
     //grunt.task.run(['clean', 'copy']);
-    grunt.task.run(['clean:compress','compress']);
+    grunt.task.run(['clean:compress','compress','stylus','replace']);
   });
 };
