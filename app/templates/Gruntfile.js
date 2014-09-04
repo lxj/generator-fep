@@ -1,15 +1,14 @@
 'use strict';
 
-var fs = require("fs");
-
-function extand(target, source) {
-  for (var p in source) {
-      if (source.hasOwnProperty(p)){
+var fs = require("fs"),
+    extand = function(target, source){
+      for (var p in source) {
+        if (source.hasOwnProperty(p)){
           target[p] = source[p];
+        }
       }
-  }
-  return target;
-}
+      return target;
+    };
 
 module.exports = function(grunt) {
 
@@ -146,7 +145,15 @@ module.exports = function(grunt) {
           patterns: [
             {
               match: /(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)(\?*[^"')]+)/ig, 
-              replacement: '$1'+(siteConfig.cdn || '$2')+'$3?version='+siteConfig.static.ver
+              replacement : function(match){
+                var mhString = match,
+                    mhs = mhString.match(/(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)(\?*[^"')]+)/i),
+                    cdn = siteConfig.cdn ? siteConfig.cdn.replace(/[\/\\]+$/,''):'';
+                if(mhs){
+                  mhString = mhs[1]+(cdn || mhs[2])+mhs[3]+'?version='+siteConfig.static.ver;
+                }
+                return mhString
+              }
             }
           ]
         },
@@ -222,7 +229,7 @@ module.exports = function(grunt) {
       },
       stylus: {
         files: ['**/*.styl'],
-        tasks: ['stylus']
+        tasks: ['stylus','replace']
       },
       copy:{
         files: ['src/**/*.{png,jpg,jpeg,gif}'],
@@ -249,14 +256,14 @@ module.exports = function(grunt) {
     grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
   });
 
-  grunt.registerTask('default', ['connect:server','clean:static','copy','jade','stylus','watch']);
-  grunt.registerTask('build', ['imagemin','stylus','uglify','cssmin']);
+  grunt.registerTask('default', ['connect:server','clean:static','copy','jade','stylus','replace','watch']);
+  grunt.registerTask('build', ['imagemin','stylus','uglify','replace','cssmin']);
   grunt.registerTask('zip', ['clean:compress','compress']);
   grunt.registerTask('publish','打包发布', function(){
-    grunt.log.writeln("\n打包发布中.......".green)
-    siteConfig.cdn = "<%= cdn %>";
-    grunt.log.writeln(("cdn地址为:"+siteConfig.cdn).green)
-    //grunt.task.run(['clean', 'copy']);
+    siteConfig.cdn = "http://image1.webscache.com/kan/<%= staticAsset %>/<%= projectVersion %>/"
+    grunt.log.writeln("\n打包发布中.......".green);
+    grunt.log.writeln(("cdn地址为:"+siteConfig.cdn).green);
     grunt.task.run(['stylus','replace']);
   });
+  
 };

@@ -61,6 +61,11 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
           default: '1.0'
         },
         {
+          name: 'defaultSVNdir',
+          message: '要创建默认目录结构吗(trunk/branches/tags)?',
+          default: 'N/Y'
+        },
+        {
           name: 'staticAsset',
           message: '静态资源文件存放:?',
           default :projectName+'_assets'
@@ -81,17 +86,22 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
         this.projectName = props.projectName;
         this.staticAsset = props.staticAsset;
         this.projectVersion = props.projectVersion;
-        this.user = props.user
-        this.mail = props.mail
+        this.user = props.user;
+        this.mail = props.mail;
+        this.defaultSVNdir = props.defaultSVNdir;
         done();
       }.bind(this));
     }
   },
   configuring: {
     enforceFolderName: function () {
-      //console.log(this.destinationRoot())
-      //this.destinationRoot(this.appname);
-      //this.config.save();
+      if(/^y/i.test(this.defaultSVNdir)){
+        this.dest.mkdir('trunk');
+        this.dest.mkdir('branches');
+        this.dest.mkdir('tags');
+        this.destinationRoot('trunk');
+        this.config.save();
+      }
     }
   },
   module : function(){
