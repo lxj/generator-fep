@@ -37,9 +37,8 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
   },
 
   initializing: function () {
-    var pkg = {};
-    pkg.files = pkg.files || [];
-    pkg.files.push(this.name);
+    var fep = this.dest.readJSON('fep.json');
+    this.htmlTemplete = fep.htmlTemplete || 'ejs';
     this.dirname = this._.dasherize(this.name);
     this.appbegintime = today();
   },
@@ -82,7 +81,11 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
 
     this.dest.mkdir(pagedir);
     this.dest.mkdir(pagedir+'/img');
-    this.template('demo.jade', pagedir + '/'+this.dirname+'.jade');
+    if(this.htmlTemplete==='ejs'){
+      this.template('demo.ejs.tpl', pagedir + '/'+this.dirname+'.html');
+    }else if(this.htmlTemplete==='jade'){
+      this.template('demo.tpl', pagedir + '/'+this.dirname+'.jade');
+    }
     this.template('demo.styl', pagedir + '/'+this.dirname+'.styl');
     this.template('demo.js', pagedir + '/'+this.dirname+'.js');
   }

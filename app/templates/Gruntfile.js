@@ -166,12 +166,12 @@ module.exports = function(grunt) {
         ]
       }
     },
-    jade: {
+    <% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>: {
       compile: {
           files: [{
             expand: true,
             cwd: 'src',
-            src: [ 'pages/**/*.jade'],
+            src: [ 'pages/**/*.<% if(htmlTemplete==="ejs"){ %>html<%}else{%>jade<% } %>'],
             dest: 'build',
             ext: '.html'
           }],
@@ -223,10 +223,17 @@ module.exports = function(grunt) {
           'build/**/*'
         ]
       },
+      <% if(htmlTemplete==="ejs"){ %>
+      ejs: {
+        files: ['src/**/*.html','**/*.json'],
+        tasks: ['ejs']
+      },
+      <%}else{%>
       jade: {
         files: ['**/*.jade','**/*.json'],
         tasks: ['jade']
       },
+      <% } %>
       stylus: {
         files: ['**/*.styl'],
         tasks: ['stylus','replace']
@@ -241,7 +248,6 @@ module.exports = function(grunt) {
   
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -251,12 +257,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-replace');
-
+  <% if(htmlTemplete==="ejs"){ %>
+  grunt.loadNpmTasks('grunt-fep-ejs');
+  <%}else{%>
+  grunt.loadNpmTasks('grunt-contrib-jade');
+  <% } %>
+  
   grunt.event.on('watch', function(action, filepath, target) {
     grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
   });
 
-  grunt.registerTask('default', ['connect:server','clean:static','copy','jade','stylus','replace','watch']);
+  grunt.registerTask('default', ['connect:server','clean:static','copy','<% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>','stylus','replace','watch']);
   grunt.registerTask('build', ['imagemin','stylus','uglify','replace','cssmin']);
   grunt.registerTask('zip', ['clean:compress','compress']);
   grunt.registerTask('publish','打包发布', function(){

@@ -2,5 +2,6 @@
   "pagename":"<%= title %>",
   "cssFile" : ["<%= dirname %>.css"],
   "jsFile" : ["<%= dirname %>.js"],
-  "pageid" : "<%= pageid %>"
+  "pageid" : "<%= pageid %>",
+  "htmlTemplete" : "<%= htmlTemplete %>"
 }

@@ -1,0 +1,11 @@
+{
+	"name": "<%= _.slugify(appname) %>",
+	"version": "<%= projectVersion %>",
+	"description": "<%= _.slugify(appname) %>",
+	"cssCompile":"<%= cssCompile %>",
+	"author": {
+        "name": "<%=user%>",
+        "email": "<%=mail%>"
+    },
+    "htmlTemplete":"<%= htmlTemplete %>"
+}

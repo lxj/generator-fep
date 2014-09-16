@@ -73,6 +73,16 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
           default :generatorName+'_assets'
         },
         {
+          name: 'cssCompile',
+          message: 'css预处理器(styl/css):',
+          default :'styl'
+        },
+        {
+          name: 'htmlTemplete',
+          message: 'html模板引擎(ejs/jade):',
+          default :'ejs'
+        },
+        {
           name: 'cdn',
           message: 'cdn地址:',
           default :'http://image1.webscache.com/kan/'
@@ -115,9 +125,12 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
         this.appname = this.generatorName;
         this.projectVersion = props.projectVersion;
         this.staticAsset = props.staticAsset;
+        this.cssCompile = props.cssCompile;
+        this.htmlTemplete = /^ejs/i.test(props.htmlTemplete) ? 'ejs' : 'jade';
+        this.tplExt = this.htmlTemplete === 'jade' ? 'jade' : 'ejs';
         this.cdn = props.cdn;
-        this.user = props.user
-        this.mail = props.mail
+        this.user = props.user;
+        this.mail = props.mail;
         done();
         
       }.bind(this));
@@ -135,49 +148,52 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
   },
 
   writing: {
-    projectfiles: function () {
-      this.template('_package.json', 'package.json');
-      this.template('editorconfig', '.editorconfig');
-      this.template('jshintrc', '.jshintrc');
-      this.template('_travis.yml', '.travis.yml');
+
+    readme: function () {
       this.template('README.md');
+    },
+    jsonfile: function () {
+      this.template('_package.json', 'package.json');
+      this.template('_fep.json', 'fep.json');
+    },
+    gruntfile: function () {
       this.template('Gruntfile.js', 'Gruntfile.js');
     },
-
-    gitfiles: function () {
-      this.src.copy('gitattributes', '.gitattributes');
-      this.src.copy('gitignore', '.gitignore');
-    },
-
     app: function () {
-      this.dest.mkdir('build');
       this.dest.mkdir('build/images');
       this.dest.mkdir('build/pages');
       this.dest.mkdir('build/'+this.staticAsset);
-      this.dest.mkdir('src');
-      this.dest.mkdir('src/mods');
-      this.dest.mkdir('src/mods/global');
       this.dest.mkdir('src/mods/global/img');
-      this.template('src/mods/global/global.styl', 'src/mods/global/global.styl');
-      this.template('src/mods/global/global.js', 'src/mods/global/global.js');
-      this.dest.mkdir('src/mods/header');
       this.dest.mkdir('src/mods/header/img');
-      this.src.copy('src/mods/header/header.jade', 'src/mods/header/header.jade');
-      this.template('src/mods/header/header.styl', 'src/mods/header/header.styl');
-      this.template('src/mods/header/header.js', 'src/mods/header/header.js');
-      this.dest.mkdir('src/mods/footer');
       this.dest.mkdir('src/mods/footer/img');
-      this.src.copy('src/mods/footer/footer.jade', 'src/mods/footer/footer.jade');
-      this.template('src/mods/footer/footer.styl', 'src/mods/footer/footer.styl');
-      this.template('src/mods/footer/footer.js', 'src/mods/footer/footer.js');
-      this.dest.mkdir('src/pages');
-      this.dest.mkdir('src/pages/index');
       this.dest.mkdir('src/pages/index/img');
-      this.src.copy('src/pages/index/index.jade', 'src/pages/index/index.jade');
-      this.template('src/pages/index/index.styl', 'src/pages/index/index.styl');
-      this.template('src/pages/index/index.js', 'src/pages/index/index.js');
-      this.src.copy('src/pages/index/data.json','src/pages/index/data.json');
       this.superb = superb();
+    },
+    testData : function(){
+      this.src.copy('data.json','src/pages/index/data.json');
+    },
+    jsFile : function(){
+      this.template('global.js', 'src/mods/global/global.js');
+      this.template('header.js', 'src/mods/header/header.js');
+      this.template('footer.js', 'src/mods/footer/footer.js');
+      this.template('index.js', 'src/pages/index/index.js');
+    },
+    cssFile : function(){
+      this.template('global.styl', 'src/mods/global/global.styl');
+      this.template('header.styl', 'src/mods/header/header.styl');
+      this.template('footer.styl', 'src/mods/footer/footer.styl');
+      this.template('index.styl', 'src/pages/index/index.styl');
+    },
+    tpl : function(){
+      if(this.tplExt==='ejs'){
+        this.src.copy('header.ejs.tpl', 'src/mods/header/header.html');
+        this.src.copy('footer.ejs.tpl', 'src/mods/footer/footer.html');
+        this.src.copy('index.ejs.tpl', 'src/pages/index/index.html');
+      }else if(this.tplExt==='jade'){
+        this.src.copy('header.tpl', 'src/mods/header/header.jade');
+        this.src.copy('footer.tpl', 'src/mods/footer/footer.jade');
+        this.src.copy('index.tpl', 'src/pages/index/index.jade');
+      }
     }
   },
 
