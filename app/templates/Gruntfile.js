@@ -144,11 +144,11 @@ module.exports = function(grunt) {
         options: {
           patterns: [
             {
-              match: /(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)(\?*[^"')]+)/ig, 
+              match: /(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)(\?*[^"')]*)/ig, 
               replacement : function(match){
                 var mhString = match,
-                    mhs = mhString.match(/(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)(\?*[^"')]+)/i),
-                    cdn = siteConfig.cdn ? siteConfig.cdn.replace(/[\/\\]+$/,''):'';
+                    mhs = mhString.match(/(url\s*\(\s*['"]*\s*)((?:(?!http:\/\/)(?!\/img\/).)+)((?:(?!\))(?!['"])(?!\?).)+)(\?*[^"')]*)/i),
+                    cdn = siteConfig.cdn ? siteConfig.cdn.replace(/[\/\\]+$/,''):'..';
                 if(mhs){
                   mhString = mhs[1]+(cdn || mhs[2])+mhs[3]+'?version='+siteConfig.static.ver;
                 }
