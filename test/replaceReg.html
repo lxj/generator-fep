@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>replaceReg</title>
+  <style>
+    *{margin:0;padding:0;}
+    body{
+      font-size:14px;
+      line-height:2
+    }
+    @font-face {
+        font-family: 'Glyphicons Halflings';
+        src: url(./fonts/glyphicons-halflings-regular.eot);
+        src: url(./fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(./fonts/glyphicons-halflings-regular.woff) format('woff'),url(./fonts/glyphicons-halflings-regular.ttf) format('truetype'),url(./fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
+    }
+    .glyphicon {
+      position: relative;
+      top: 1px;
+      display: inline-block;
+      font-family: 'Glyphicons Halflings';
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin:0 15px;
+    }
+    .glyphicon-ok{
+      color:#fff
+    }
+    .glyphicon-ok:before {
+      content: "\e013";
+    }
+    .glyphicon-remove{
+      color:#fff;
+    }
+    .glyphicon-remove:before {
+      content: "\e014";
+    }
+    #re,#output{
+      margin: 0 100px;
+      margin-bottom: 30px
+    }
+    .item{
+      display: inline;
+      margin-bottom:20px;
+      padding:5px 10px;
+      margin-left:30px;
+      color:#fff
+    }
+  </style>
+</head> 
+<body>
+  <b class="glyphicon-ok glyphicon"></b>
+  <b class="glyphicon-remove glyphicon"></b>
+<div id="output"></div>
+<script type="text/javascript">
+  var data=[
+    ['.bg{background:url(img/test.png)}','url(../img/test.png?version=123'],
+    ['.bg{background:url(/img/test.png)}','url(../img/test.png?version=123'],
+    ['.bg2{background:url(./img/test.png)}','url(../img/test.png?version=123'],
+    ['.bg3{background:url(../img/test.png)}','url(../img/test.png?version=123'],
+    ['.bg4{background:url(../global/img/test.png)}','url(../img/test.png?version=123'],
+    ['.bg5{background:url(../list/img/test.png)}','url(../img/test.png?version=123'],
+    ['.bg6{background:url(../global/icon/img/test.png)}','url(../img/test.png?version=123'],
+    ['.bg7{background:url(http://www.lxj.com/img/test.png)}','url(http://www.lxj.com/img/test.png?version=123'],
+    ['.bg8{background:url(img/test.png?v=version)}','url(../img/test.png?version=123'],
+    ['.bg8{background:url(/img/test.png?v=version)}','url(../img/test.png?version=123'],
+    ['.bg9{background:url(./img/test.png?v=version)}','url(../img/test.png?version=123'],
+    ['.bg10{background:url(../img/test.png?v=version)}','url(../img/test.png?version=123'],
+    ['.bg14{background:url(../global/img/test.png?v=version)}','url(../img/test.png?version=123'],
+    ['.bg15{background:url(../list/img/test.png?v=version)}','url(../img/test.png?version=123'],
+    ['.bg16{background:url(../global/icon/img/test.png?v=version)}','url(../img/test.png?version=123'],
+    ['.bg17{background:url(http://www.lxj.com/img/test.png?v=version)}','url(http://www.lxj.com/img/test.png?version=123'],
+    ['.bg20{background:url("img/test.png")}','url("../img/test.png?version=123'],
+    ['.bg20{background:url("/img/test.png")}','url("../img/test.png?version=123'],
+    ['.bg12{background:url("./img/test.png")}','url("../img/test.png?version=123'],
+    ['.bg13{background:url("../img/test.png")}','url("../img/test.png?version=123'],
+    ['.bg14{background:url("../global/img/test.png")}','url("../img/test.png?version=123'],
+    ['.bg15{background:url("../list/img/test.png")}','url("../img/test.png?version=123'],
+    ['.bg16{background:url("../global/icon/img/test.png")}','url("../img/test.png?version=123'],
+    ['.bg17{background:url("http://www.lxj.com/img/test.png")}','url("http://www.lxj.com/img/test.png?version=123'],
+    ['.bg30{background:url("img/test.png?v=version")}','url("../img/test.png?version=123'],
+    ['.bg30{background:url("/img/test.png?v=version")}','url("../img/test.png?version=123'],
+    ['.bg32{background:url("./img/test.png?v=version")}','url("../img/test.png?version=123'],
+    ['.bg33{background:url("../img/test.png?v=version")}','url("../img/test.png?version=123'],
+    ['.bg34{background:url("../global/img/test.png?v=version")}','url("../img/test.png?version=123'],
+    ['.bg35{background:url("../list/img/test.png?v=version")}','url("../img/test.png?version=123'],
+    ['.bg36{background:url("../global/icon/img/test.png?v=version")}','url("../img/test.png?version=123'],
+    ['.bg37{background:url("http://www.lxj.com/img/test.png?v=version")}','url("http://www.lxj.com/img/test.png?version=123'],
+    ['.bg{background:url(img/show/test.png)}','url(../img/show/test.png?version=123'],
+    ['.bg{background:url(/img/list/test.png)}','url(../img/list/test.png?version=123'],
+    ['.bg2{background:url(./img/icon/test.png)}','url(../img/icon/test.png?version=123'],
+    ['.bg3{background:url(../img/show/test.png)}','url(../img/show/test.png?version=123'],
+    ['.bg4{background:url(../global/show/img/test.png)}','url(../img/test.png?version=123'],
+    ['.bg5{background:url(../list/img/show/test.png)}','url(../img/show/test.png?version=123'],
+    ['.bg6{background:url(../global/icon/img/show/test.png)}','url(../img/show/test.png?version=123'],
+    ['.bg7{background:url(http://www.lxj.com/img/show/test.png)}','url(http://www.lxj.com/img/show/test.png?version=123'],
+    ['.bg8{background:url(img/show/test.png?v=version)}','url(../img/show/test.png?version=123'],
+    ['.bg8{background:url(/img/show/test.png?v=version)}','url(../img/show/test.png?version=123'],
+    ['.bg9{background:url(./img/show/test.png?v=version)}','url(../img/show/test.png?version=123'],
+    ['.bg10{background:url(../img/show/test.png?v=version)}','url(../img/show/test.png?version=123'],
+    ['.bg14{background:url(../global/img/show/test.png?v=version)}','url(../img/show/test.png?version=123'],
+    ['.bg15{background:url(../list/img/show/test.png?v=version)}','url(../img/show/test.png?version=123'],
+    ['.bg16{background:url(../global/icon/img/show/test.png?v=version)}','url(../img/show/test.png?version=123'],
+    ['.bg17{background:url(http://www.lxj.com/img/show/test.png?v=version)}','url(http://www.lxj.com/img/show/test.png?version=123'],
+    ['.bg20{background:url("img/show/test.png")}','url("../img/show/test.png?version=123'],
+    ['.bg20{background:url("/img/show/test.png")}','url("../img/show/test.png?version=123'],
+    ['.bg12{background:url("./img/show/test.png")}','url("../img/show/test.png?version=123'],
+    ['.bg13{background:url("../img/show/test.png")}','url("../img/show/test.png?version=123'],
+    ['.bg14{background:url("../global/img/show/test.png")}','url("../img/show/test.png?version=123'],
+    ['.bg15{background:url("../list/img/show/test.png")}','url("../img/show/test.png?version=123'],
+    ['.bg16{background:url("../global/icon/img/show/test.png")}','url("../img/show/test.png?version=123'],
+    ['.bg17{background:url("http://www.lxj.com/img/show/test.png")}','url("http://www.lxj.com/img/show/test.png?version=123'],
+    ['.bg30{background:url("img/show/test.png?v=version")}','url("../img/show/test.png?version=123'],
+    ['.bg30{background:url("/img/show/test.png?v=version")}','url("../img/show/test.png?version=123'],
+    ['.bg32{background:url("./img/show/test.png?v=version")}','url("../img/show/test.png?version=123'],
+    ['.bg33{background:url("../img/show/test.png?v=version")}','url("../img/show/test.png?version=123'],
+    ['.bg34{background:url("../global/img/show/test.png?v=version")}','url("../img/show/test.png?version=123'],
+    ['.bg35{background:url("../list/img/show/test.png?v=version")}','url("../img/show/test.png?version=123'],
+    ['.bg36{background:url("../global/icon/img/show/test.png?v=version")}','url("../img/show/test.png?version=123'],
+    ['.bg37{background:url("http://www.lxj.com/img/show/test.png?v=version")}','url("http://www.lxj.com/img/show/test.png?version=123'],
+  ];
+
+var regStr = '(url\\s*\\(\\s*[\'\"]*\\s*)(?:(?:((?:(?!\\/img\\/)(?!\\}).)*)(\\/img\\/(?:(?!\\))(?![\'\"])(?!\\?).)+))|(img\\/(?:(?!\\))(?![\'\"])(?!\\?).)+))(\\?*[^\"\')]*)';
+var siteConfig = {};
+var result=''
+//siteConfig.cdn = "http://www.pps.tv/kan/asset";
+
+function parseCSSBgUrl(str){
+  var mhString = str,
+      under,
+      mhs = mhString.match(new RegExp(regStr,'i')),
+      cdn = siteConfig.cdn ? siteConfig.cdn.replace(/[\/\\]+$/,''):'..';
+  if(mhs){
+    //console.log(mhs)
+    if(mhs[2]!==under){
+      /^http/.test(mhs[2]) && (cdn = '');
+      mhString = mhs[1]+(cdn || mhs[2])+mhs[3]+'?version='+123;
+    }else{
+      mhString = mhs[1]+cdn+'/'+mhs[4]+'?version='+123;
+    }
+  }
+  return mhString
+}
+
+var reArr=[];
+for(var j=0,jen = data.length;j<jen;j++){
+  data[j][0].replace(new RegExp(regStr,'ig'),function(k){
+      result+=data[j][0];
+      var con = k+'  =>  '+parseCSSBgUrl(k);
+      if(parseCSSBgUrl(k)===data[j][1]){
+        reArr.push('<p class="item" style="background:#490;">'+(j+1)+'<b class="glyphicon-ok glyphicon"></b>'+con+'</p>');
+      }else{
+         reArr.push('<p class="item" style="background:#b00;">'+(j+1)+'<b class="glyphicon-remove glyphicon"></b>'+con+'</p>');
+      }
+      return parseCSSBgUrl(k)
+    })
+}
+
+
+var nub = 0;
+result = result.replace(new RegExp(regStr,'ig'),function(k){
+    var con = (++nub)+'   '+k+'  =>  '+parseCSSBgUrl(k);
+    console.log(con)
+    return parseCSSBgUrl(k)
+  })
+
+console.log(result)
+
+// if(reArr.length!==str.length){
+//   console.log("测试不通过")
+// }else{
+//   console.log("匹配成功")
+// }
+
+document.getElementById('output').innerHTML=reArr.join('<br />');
+//console.log(newStr)
+</script>
+</body>
+</html>

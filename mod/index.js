@@ -39,7 +39,9 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     var fep = this.dest.readJSON('fep.json');
     this.htmlTemplete = fep.htmlTemplete || 'ejs';
-    this.dirname = this._.dasherize(this.name);
+    //this._.dasherize => recommend_video to recommend-video
+    //this.dirname = this._.dasherize(this.name);
+    this.dirname = this.name;
     this.appbegintime = today();
   },
 
