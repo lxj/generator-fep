@@ -3,5 +3,5 @@
 	"topFile": ["<%= dirname %>.css"],
 	"bottomFile": ["<%= dirname %>.js"],
 	"pageid": "<%= pageid %>",
-	"seajs": "1",
+	"seajs": "1"
 }

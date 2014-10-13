@@ -170,7 +170,7 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       this.superb = superb();
     },
     testData : function(){
-      this.src.copy('data.json','src/pages/index/data.json');
+      this.template('data.json','src/pages/index/data.json');
     },
     jsFile : function(){
       this.template('global.js', 'src/mods/global/global.js');

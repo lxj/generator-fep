@@ -17,10 +17,16 @@
     <script type="text/javascript"
   src="http://static.iqiyi.com/js/lib/sea1.2.js"></script>
     <script>
+    <% if(debug){ %>
     seajs.config({
-        base:"http://fengan.iqiyi.com:9000/build/fengan_assets/0.0.1/js/",
-        cwd : "http://fengan.iqiyi.com:9000/build/fengan_assets/0.0.1/js/"
+        base:"http://fengan.iqiyi.com:9000/build/<%= staticAsset %>/<%= projectVersion %>/js/"
     })
+    <%}else{%>
+    seajs.config({
+        base:"http://fengan.iqiyi.com:9000/build/<%= staticAsset %>/<%= projectVersion %>/js/",
+        cwd : "http://fengan.iqiyi.com:9000/build/<%= staticAsset %>/<%= projectVersion %>/js/"
+    })
+    <%}%>
     </script>
 </head>
 <body data-page-name="<%=pageid%>">

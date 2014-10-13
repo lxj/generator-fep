@@ -14,6 +14,8 @@ module.exports = function(grunt) {
       request : null,
       reqUrl : '',
       debug : false,
+      staticAsset : '<%= staticAsset %>',
+      projectVersion : '<%= projectVersion %>',
       timestamp: timestamp,
       ver: timestamp,
       mods: "../../mods",
@@ -219,7 +221,7 @@ module.exports = function(grunt) {
       seajs :{
         options: {
           patterns: [{
-            match: /(?:\.\.\/){3}fengan_assets\/0.0.1\/js\/[^"']+/ig,
+            match: /(?:\.\.\/){3}<%= staticAsset %>\/<%= projectVersion %>\/js\/[^"']+/ig,
             replacement: function(matchStr) {
               var matchs = matchStr.match(/(.+)(\/.+)(\/.+)/i);
               return matchs ? (matchs[1]+matchs[3]) : matchStr
