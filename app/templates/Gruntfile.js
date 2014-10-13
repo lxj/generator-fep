@@ -7,7 +7,6 @@ module.exports = function(grunt) {
   //grunt.file.defaultEncoding = 'gbk';
   var pkg = grunt.file.readJSON("package.json");
   var timestamp = grunt.template.today("yyyymmdd-HH-MM-ss");
-  var regStr = '(url\\s*\\(\\s*[\'\"]*\\s*)(?:(?:((?:(?!\\/img\\/)(?!\\}).)*)(\\/img\\/(?:(?!\\))(?![\'\"])(?!\\?).)+))|(img\\/(?:(?!\\))(?![\'\"])(?!\\?).)+))(\\?*[^\"\')]*)';
   var siteConfig = {
     livereload: 35729,
     static: {
@@ -206,7 +205,7 @@ module.exports = function(grunt) {
       dist: {
         options: {
           patterns: [{
-            match: new RegExp(regStr, 'ig'),
+            match: new RegExp(fepUtil.regStr, 'ig'),
             replacement: function(match) {
               return fepUtil.parseCSSBgUrl(match,{cdn:siteConfig.cdn,version:siteConfig.static.ver})
             }
