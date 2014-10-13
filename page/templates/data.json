@@ -1,7 +1,7 @@
 {
-  "pagename":"<%= title %>",
-  "cssFile" : ["<%= dirname %>.css"],
-  "jsFile" : ["<%= dirname %>.js"],
-  "pageid" : "<%= pageid %>",
-  "htmlTemplete" : "<%= htmlTemplete %>"
+	"pagename": "<%= title %>",
+	"topFile": ["<%= dirname %>.css"],
+	"bottomFile": ["<%= dirname %>.js"],
+	"pageid": "<%= pageid %>",
+	"seajs": "1",
 }

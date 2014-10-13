@@ -1,7 +1,7 @@
 {
-  "pagename":"首页",
-  "cssFile" : ["index.css"],
-  "jsFile" : ["index.js"],
-  "pageid" : "index",
-  "htmlTemplete" : "<%= htmlTemplete %>"
+	"pagename": "首页",
+	"topFile": ["index.css"],
+	"bottomFile": ["index.js"],
+	"pageid": "index",
+	"seajs" : "1"
 }

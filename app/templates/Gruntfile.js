@@ -1,27 +1,24 @@
 'use strict';
 
-var fs = require("fs"),
-  extand = function(target, source) {
-    for (var p in source) {
-      if (source.hasOwnProperty(p)) {
-        target[p] = source[p];
-      }
-    }
-    return target;
-  };
+var fepUtil = require('fep-util');
 
 module.exports = function(grunt) {
 
   //grunt.file.defaultEncoding = 'gbk';
+  var pkg = grunt.file.readJSON("package.json");
   var timestamp = grunt.template.today("yyyymmdd-HH-MM-ss");
   var regStr = '(url\\s*\\(\\s*[\'\"]*\\s*)(?:(?:((?:(?!\\/img\\/)(?!\\}).)*)(\\/img\\/(?:(?!\\))(?![\'\"])(?!\\?).)+))|(img\\/(?:(?!\\))(?![\'\"])(?!\\?).)+))(\\?*[^\"\')]*)';
   var siteConfig = {
     livereload: 35729,
     static: {
+      request : null,
+      reqUrl : '',
+      debug : false,
       timestamp: timestamp,
       ver: timestamp,
       mods: "../../mods",
       images: "../../images",
+      imagephp: "http://10.1.3.17/dummyimage/image.php?",
       css: "../../<%= staticAsset %>/<%= projectVersion %>/css",
       img: "../../<%= staticAsset %>/<%= projectVersion %>/img",
       js: "../../<%= staticAsset %>/<%= projectVersion %>/js"
@@ -32,34 +29,9 @@ module.exports = function(grunt) {
       js: "build/<%= staticAsset %>/<%= projectVersion %>/js"
     }
   }
-  /**
-   * [parseCSSBgUrl 正则替换css背景图片地址]
-   * url(img/test.png => url(../img/test.png?version=123
-   * url(/img/test.png => url(../img/test.png?version=123
-   * url(./img/test.png => url(../img/test.png?version=123
-   * url(../img/test.png => url(../img/test.png?version=123
-   * url(http://www.lxj.com/img/test.png => url(http://www.lxj.com/img/test.png?version=123
-   * @param  {[string]} str [正则替换前的字符串]
-   * @return {[string]}     [正则替换后的字符串]
-   */
-  function parseCSSBgUrl(str) {
-    var mhString = str,
-      under,
-      mhs = mhString.match(new RegExp(regStr, 'i')),
-      cdn = siteConfig.cdn ? siteConfig.cdn.replace(/[\/\\]+$/, '') : '..';
-    if (mhs) {
-      //console.log(mhs)
-      if (mhs[2] !== under) {
-        /^http/.test(mhs[2]) && (cdn = '');
-        mhString = mhs[1] + (cdn || mhs[2]) + mhs[3] + '?version=' + siteConfig.static.ver;
-      } else {
-        mhString = mhs[1] + cdn + '/' + mhs[4] + '?version=' + siteConfig.static.ver;
-      }
-    }
-    return mhString
-  }
 
   grunt.initConfig({
+    pkg: pkg,
     connect: {
       options: {
         port: 9000,
@@ -69,9 +41,22 @@ module.exports = function(grunt) {
       server: {
         options: {
           open: true, //自动打开网页 http://
-          base: [
-            'build' //主目录
-          ]
+          base: './',//主目录
+          middleware: function(connect, options, middlewares) {
+            middlewares.unshift(fepUtil.ejsCompile(
+        { 
+          data : siteConfig.static,
+          //defaultData : {grunt:'lllkkkk',img:"http://yuncdn.org/"}
+          defaultData : function(){
+            return {
+              //img:'http://www.lxj.com'
+            }
+          }
+        }
+            ));
+            middlewares.unshift(fepUtil.stylusCompile);
+            return middlewares;
+          }
         }
       }
     },
@@ -81,6 +66,56 @@ module.exports = function(grunt) {
       },
       compress: {
         src: ['build*.{zip,rar,gzip}']
+      },
+      seajs :{
+        src: ['.build']
+      }
+    },
+    transport: {
+      options: {
+        paths: ['build/<%= staticAsset %>/<%= projectVersion %>/js/']
+        //alias: pkg.spm.alias
+      },
+      src: {
+        options: {
+          idleading: '../../'
+        },
+        files: [{
+          expand: true,
+          cwd: 'src/',
+          src: ['mods/**/*.js', '!mods/**/sea.js', '!mods/**/sea1.3-debug.js', '!mods/**/rootConfig.js'],
+          filter: 'isFile',
+          dest: '.build/',
+          ext: '.js'
+        }]
+      },
+      pages: {
+        options: {
+          idleading: '../../../<%= staticAsset %>/<%= projectVersion %>/js/'
+        },
+        files: [{
+          expand: true,
+          cwd: 'src/pages/',
+          src: '**/*.js',
+          filter: 'isFile',
+          dest: '.build/pages/'
+        }]
+      }
+    },
+    concat: {
+      options: {
+        paths: ['build/<%= staticAsset %>/<%= projectVersion %>/js/'],
+        include: 'all'
+      },
+      pages: {
+        files: [{
+          expand: true,
+          flatten: true,
+          cwd: '.build/',
+          src: ['pages/**/*.js', '!pages/**/*-debug.js'],
+          dest: './build/<%= staticAsset %>/<%= projectVersion %>/js/',
+          ext: '.js'
+        }]
       }
     },
     copy: {
@@ -169,13 +204,29 @@ module.exports = function(grunt) {
           patterns: [{
             match: new RegExp(regStr, 'ig'),
             replacement: function(match) {
-              return parseCSSBgUrl(match)
+              return fepUtil.parseCSSBgUrl(match,{cdn:siteConfig.cdn,version:siteConfig.static.ver})
             }
           }]
         },
         files: [{
           expand: true,
           src: ['build/**/*.css'],
+          dest: '.'
+        }]
+      },
+      seajs :{
+        options: {
+          patterns: [{
+            match: /(?:\.\.\/){3}fengan_assets\/0.0.1\/js\/[^"']+/ig,
+            replacement: function(matchStr) {
+              var matchs = matchStr.match(/(.+)(\/.+)(\/.+)/i);
+              return matchs ? (matchs[1]+matchs[3]) : matchStr
+            }
+          }]
+        },
+        files: [{
+          expand: true,
+          src: ['build/**/*.js'],
           dest: '.'
         }]
       }
@@ -195,18 +246,7 @@ module.exports = function(grunt) {
         options: {
           pretty: true,
           data: function(dest, src) {
-            var srcDirName = src[0].toString().match(/.+\//)[0],
-              pageData = {},
-              defaultData = extand({}, siteConfig.static),
-              jsonPath = './' + srcDirName + 'data.json';
-
-            if (fs.existsSync(jsonPath)) {
-              pageData = require(jsonPath);
-            }
-
-            //console.log("dest="+dest,"src="+src,src[0].toString().match(/.+\//)[0])
-            //var pageData = require('/locals.json')
-            return extand(defaultData, pageData);
+            return fepUtil.tplData(src[0],siteConfig.static);
           }
         }
       }
@@ -232,6 +272,10 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      options: {
+        persistent: true,
+        interval: 5007
+      },
       livereload: {
         options: {
           livereload: siteConfig.livereload //监听前面声明的端口  35729
@@ -256,7 +300,7 @@ module.exports = function(grunt) {
       } %>
         stylus: {
           files: ['**/*.styl'],
-          tasks: ['stylus', 'replace']
+          tasks: ['stylus', 'replace:dist']
       },
       copy: {
         files: ['src/**/*.{png,jpg,jpeg,gif}'],
@@ -276,7 +320,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-replace'); <%
+  grunt.loadNpmTasks('grunt-replace'); 
+  grunt.loadNpmTasks('grunt-cmd-transport');
+  grunt.loadNpmTasks('grunt-cmd-concat');
+  <%
   if (htmlTemplete === "ejs") { %>
       grunt.loadNpmTasks('grunt-fep-ejs'); <%
   } else { %>
@@ -287,14 +334,15 @@ module.exports = function(grunt) {
     grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
   });
 
-  grunt.registerTask('default', ['connect:server', 'clean:static', 'copy', '<% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>', 'stylus', 'replace', 'watch']);
-  grunt.registerTask('build', ['imagemin', 'stylus', 'uglify', 'replace', 'cssmin']);
+  grunt.registerTask('default', ['connect:server', 'clean:static', 'copy', '<% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>', 'stylus', 'replace:dist', 'watch']);
+  grunt.registerTask('build', ['imagemin', 'stylus', 'uglify', 'replace:dist', 'cssmin']);
   grunt.registerTask('zip', ['clean:compress', 'compress']);
+  grunt.registerTask('seajs', ['transport', 'concat','uglify','clean:seajs','replace:seajs']);
   grunt.registerTask('publish', '打包发布', function() {
     siteConfig.cdn = "http://image1.webscache.com/kan/<%= staticAsset %>/<%= projectVersion %>/"
     grunt.log.writeln("\n打包发布中.......".green);
     grunt.log.writeln(("cdn地址为:" + siteConfig.cdn).green);
-    grunt.task.run(['stylus', 'replace']);
+    grunt.task.run(['stylus', 'replace:dist']);
   });
 
 };

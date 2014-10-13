@@ -19,6 +19,9 @@
 		"grunt-contrib-jshint":"~0.10.0",
 		"grunt-contrib-compress":"~0.11.0",
         "grunt-replace": "~0.7.9",
+		"grunt-cmd-transport" : "~0.4.1",
+		"grunt-cmd-concat" : "~0.2.7",
+		"fep-util": "~0.0.5",
 		<% if(htmlTemplete==="ejs"){ %>
 		"grunt-fep-ejs": "~0.0.1"
 		<%}else{%>
