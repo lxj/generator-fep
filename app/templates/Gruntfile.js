@@ -149,7 +149,8 @@ module.exports = function(grunt) {
       options: {
         mangle: {
           except: ['jQuery']
-        }
+        },
+        banner :"/**Create by Fep at "+grunt.template.today("yyyymmdd HH:MM:ss")+"**/\n"        
       },
       target: {
         files: [{
@@ -194,7 +195,8 @@ module.exports = function(grunt) {
           ext: '.css'
         }],
         options: {
-          compress: false
+          banner :"/**Create by Fep at "+grunt.template.today("yyyymmdd HH:MM:ss")+"**/\n",
+          compress: true
         }
       }
     },
