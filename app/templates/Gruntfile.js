@@ -10,11 +10,11 @@ module.exports = function(grunt) {
   var siteConfig = {
     livereload: 35729,
     static: {
-      request : null,
-      reqUrl : '',
-      debug : false,
-      staticAsset : '<%= staticAsset %>',
-      projectVersion : '<%= projectVersion %>',
+      request: null,
+      reqUrl: '',
+      debug: false,
+      staticAsset: '<%= staticAsset %>',
+      projectVersion: '<%= projectVersion %>',
       timestamp: timestamp,
       ver: timestamp,
       mods: "../../mods",
@@ -42,19 +42,17 @@ module.exports = function(grunt) {
       server: {
         options: {
           open: true, //自动打开网页 http://
-          base: './',//主目录
+          base: './', //主目录
           middleware: function(connect, options, middlewares) {
-            middlewares.unshift(fepUtil.ejsCompile(
-        { 
-          data : siteConfig.static,
-          //defaultData : {grunt:'lllkkkk',img:"http://yuncdn.org/"}
-          defaultData : function(){
-            return {
-              //img:'http://www.lxj.com'
-            }
-          }
-        }
-            ));
+            middlewares.unshift(fepUtil.ejsCompile({
+              data: siteConfig.static,
+              //defaultData : {grunt:'lllkkkk',img:"http://yuncdn.org/"}
+              defaultData: function() {
+                return {
+                  //img:'http://www.lxj.com'
+                }
+              }
+            }));
             middlewares.unshift(fepUtil.stylusCompile);
             return middlewares;
           }
@@ -68,7 +66,7 @@ module.exports = function(grunt) {
       compress: {
         src: ['build*.{zip,rar,gzip}']
       },
-      seajs :{
+      seajs: {
         src: ['.build']
       }
     },
@@ -151,7 +149,7 @@ module.exports = function(grunt) {
         mangle: {
           except: ['jQuery']
         },
-        banner :"/**Create by Fep at "+grunt.template.today("yyyymmdd HH:MM:ss")+"**/\n"        
+        banner: "/**Create by Fep at " + grunt.template.today("yyyymmdd HH:MM:ss") + "**/\n"
       },
       target: {
         files: [{
@@ -196,7 +194,7 @@ module.exports = function(grunt) {
           ext: '.css'
         }],
         options: {
-          banner :"/**Create by Fep at "+grunt.template.today("yyyymmdd HH:MM:ss")+"**/\n",
+          banner: "/**Create by Fep at " + grunt.template.today("yyyymmdd HH:MM:ss") + "**/\n",
           compress: true
         }
       }
@@ -207,7 +205,10 @@ module.exports = function(grunt) {
           patterns: [{
             match: new RegExp(fepUtil.regStr, 'ig'),
             replacement: function(match) {
-              return fepUtil.parseCSSBgUrl(match,{cdn:siteConfig.cdn,version:siteConfig.static.ver})
+              return fepUtil.parseCSSBgUrl(match, {
+                cdn: siteConfig.cdn,
+                version: siteConfig.static.ver
+              })
             }
           }]
         },
@@ -217,13 +218,13 @@ module.exports = function(grunt) {
           dest: '.'
         }]
       },
-      seajs :{
+      seajs: {
         options: {
           patterns: [{
             match: /(?:\.\.\/){3}<%= staticAsset %>\/<%= projectVersion %>\/js\/[^"']+/ig,
             replacement: function(matchStr) {
               var matchs = matchStr.match(/(.+)(\/.+)(\/.+)/i);
-              return matchs ? (matchs[1]+matchs[3]) : matchStr
+              return matchs ? (matchs[1] + matchs[3]) : matchStr
             }
           }]
         },
@@ -249,7 +250,7 @@ module.exports = function(grunt) {
         options: {
           pretty: true,
           data: function(dest, src) {
-            return fepUtil.tplData(src[0],siteConfig.static);
+            return fepUtil.tplData(src[0], siteConfig.static);
           }
         }
       }
@@ -324,10 +325,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-replace'); 
+  grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-cmd-transport');
-  grunt.loadNpmTasks('grunt-cmd-concat');
-  <%
+  grunt.loadNpmTasks('grunt-cmd-concat'); <%
   if (htmlTemplete === "ejs") { %>
       grunt.loadNpmTasks('grunt-fep-ejs'); <%
   } else { %>
@@ -341,7 +341,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['connect:server', 'clean:static', 'copy', '<% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>', 'stylus', 'replace:dist', 'watch']);
   grunt.registerTask('build', ['imagemin', 'stylus', 'uglify', 'replace:dist', 'cssmin']);
   grunt.registerTask('zip', ['clean:compress', 'compress']);
-  grunt.registerTask('seajs', ['transport', 'concat','uglify','clean:seajs','replace:seajs']);
+  grunt.registerTask('seajs', ['transport', 'concat', 'uglify', 'clean:seajs', 'replace:seajs']);
   grunt.registerTask('publish', '打包发布', function() {
     siteConfig.cdn = "http://image1.webscache.com/kan/<%= staticAsset %>/<%= projectVersion %>/"
     grunt.log.writeln("\n打包发布中.......".green);
