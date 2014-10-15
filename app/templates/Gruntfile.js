@@ -49,7 +49,7 @@ module.exports = function(grunt) {
               //defaultData : {grunt:'lllkkkk',img:"http://yuncdn.org/"}
               defaultData: function() {
                 return {
-                  //img:'http://www.lxj.com'
+                  img: this.debug ? "/build/<%= staticAsset %>/<%= projectVersion %>/img" : siteConfig.build.img
                 }
               }
             }));
