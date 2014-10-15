@@ -11,6 +11,7 @@ module.exports = function(grunt) {
     livereload: 35729,
     static: {
       request: null,
+      location: null,
       reqUrl: '',
       debug: false,
       staticAsset: '<%= staticAsset %>',
