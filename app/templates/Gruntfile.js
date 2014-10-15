@@ -46,6 +46,7 @@ module.exports = function(grunt) {
           base: './', //主目录
           middleware: function(connect, options, middlewares) {
             middlewares.unshift(fepUtil.ejsCompile({
+              serverOtions: options,
               data: siteConfig.static,
               //defaultData : {grunt:'lllkkkk',img:"http://yuncdn.org/"}
               defaultData: function() {
