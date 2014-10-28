@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     pkg: pkg,
     connect: {
       options: {
-        port: 9000,
+        port: <%= nodeServerPort %>,
         hostname: '*', // IP，localhost 或域名
         livereload: siteConfig.livereload //watch 监听的端口,
       },
@@ -86,8 +86,7 @@ module.exports = function(grunt) {
           cwd: 'src/',
           src: ['mods/**/*.js', '!mods/**/sea.js', '!mods/**/sea1.3-debug.js', '!mods/**/rootConfig.js'],
           filter: 'isFile',
-          dest: '.build/',
-          ext: '.js'
+          dest: '.build/'
         }]
       },
       pages: {
@@ -151,7 +150,7 @@ module.exports = function(grunt) {
         mangle: {
           except: ['jQuery']
         },
-        banner: "/**Create by Fep at " + grunt.template.today("yyyymmdd HH:MM:ss") + "**/\n"
+        footer: "\n/**Create by Fep at " + grunt.template.today("yyyymmdd HH:MM:ss") + "**/\n"
       },
       target: {
         files: [{
@@ -226,7 +225,7 @@ module.exports = function(grunt) {
             match: /(?:\.\.\/){3}<%= staticAsset %>\/<%= projectVersion %>\/js\/[^"']+/ig,
             replacement: function(matchStr) {
               var matchs = matchStr.match(/(.+)(\/.+)(\/.+)/i);
-              return matchs ? (matchs[1] + matchs[3]) : matchStr
+              return matchs ? ('.'+matchs[3]) : matchStr
             }
           }]
         },

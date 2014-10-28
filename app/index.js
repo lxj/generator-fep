@@ -68,6 +68,11 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
           default: '0.0.1'
         },
         {
+          name: 'nodeServerPort',
+          message: 'node server port',
+          default: '9000'
+        },
+        {
           name: 'staticAsset',
           message: '静态资源文件存放:',
           default :generatorName+'_assets'
@@ -123,6 +128,7 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
         }
         this.generatorName = props.generatorName;
         this.appname = this.generatorName;
+        this.nodeServerPort = props.nodeServerPort;
         this.projectVersion = props.projectVersion;
         this.staticAsset = props.staticAsset;
         this.cssCompile = props.cssCompile;
@@ -157,7 +163,10 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       this.template('_fep.json', 'fep.json');
     },
     gruntfile: function () {
-      this.template('Gruntfile.js', 'Gruntfile.js');
+      this.src.copy('Gruntfile.js', 'Gruntfile.js');
+    },
+    gitignore: function () {
+      this.template('.gitignore', '.gitignore');
     },
     app: function () {
       this.dest.mkdir('build/images');
