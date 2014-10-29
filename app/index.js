@@ -155,7 +155,7 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       this.template('Gruntfile.js', 'Gruntfile.js');
     },
     gitignore: function() {
-      this.src.copy('.gitignore', '.gitignore');
+      this.src.copy('gitignore', '.gitignore');
     },
     app: function() {
       this.dest.mkdir('build/images');
