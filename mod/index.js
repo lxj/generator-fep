@@ -82,7 +82,7 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
         pagedir = (cwdMatch ? cwdMatch[0] : (cwd+'/src'))+'/mods/'+this.dirname;
 
     this.dest.mkdir(pagedir);
-    this.dest.mkdir(pagedir+'/img');
+    this.dest.mkdir(pagedir+'/img/'+this.dirname);
     if(this.htmlTemplete==='ejs'){
       this.template('demo.ejs.tpl', pagedir + '/'+this.dirname+'.html');
     }else if(this.htmlTemplete==='jade'){

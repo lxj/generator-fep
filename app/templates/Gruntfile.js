@@ -123,14 +123,12 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'src/',
-          src: ['**/img/*', '!**/*.psd'],
+          src: ['**/img/**', '!**/*.psd'],
           dest: siteConfig.build.img,
           rename: function(dest, src) {
             var reg = /(?:mods|pages)\/(.+)\/img\//g,
               newSrc;
-            newSrc = src.replace(reg, function(k1, k2) {
-              return k2 === "global" ? '' : (k2 + '/')
-            });
+            newSrc = src.replace(reg, '');
             return src === newSrc ? '' : (siteConfig.build.img.replace(/^\/+/, '') + '/' + newSrc)
           }
         }]
