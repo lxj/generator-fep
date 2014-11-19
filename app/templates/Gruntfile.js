@@ -291,13 +291,13 @@ module.exports = function(grunt) {
       <%
       if (htmlTemplete === "ejs") { %>
           ejs: {
-            files: ['src/**/*.html', '**/*.json'],
+            files: ['src/**/*.html', 'src/**/*.json'],
             tasks: ['ejs']
         },
         <%
       } else { %>
           jade: {
-            files: ['**/*.jade', '**/*.json'],
+            files: ['src/**/*.jade', 'src/**/*.json'],
             tasks: ['jade']
         },
         <%
@@ -338,6 +338,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', ['connect:server', 'clean:static', 'copy', '<% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>', 'stylus', 'replace:dist', 'watch']);
+  grunt.registerTask('server', ['connect:server','watch:livereload']);
   grunt.registerTask('build', ['imagemin', 'stylus', 'uglify', 'replace:dist', 'cssmin']);
   grunt.registerTask('zip', ['clean:compress', 'compress']);
   grunt.registerTask('seajs', ['transport', 'concat', 'uglify', 'clean:seajs', 'replace:seajs']);
