@@ -102,6 +102,6 @@ var SubGeneratorGenerator = module.exports = yeoman.generators.Base.extend({
     }
     this.template('demo.styl', pagedir + '/'+this.dirname+'.styl');
     this.template('demo.js', pagedir + '/'+this.dirname+'.js');
-    this.template('data.json', pagedir + '/data.json');
+    this.template('data.json', pagedir + '/'+this.dirname+'.json');
   }
 });

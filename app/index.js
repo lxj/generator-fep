@@ -162,9 +162,9 @@ var GeneratorGenerator = module.exports = yeoman.generators.Base.extend({
       this.dest.mkdir('build/pages');
       this.dest.mkdir('build/' + this.staticAsset);
       this.dest.mkdir('src/mods/global/img');
-      this.dest.mkdir('src/mods/header/img');
-      this.dest.mkdir('src/mods/footer/img');
-      this.dest.mkdir('src/pages/index/img');
+      this.dest.mkdir('src/mods/header/img/header');
+      this.dest.mkdir('src/mods/footer/img/footer');
+      this.dest.mkdir('src/pages/index/img/index');
       this.superb = superb();
     },
     testData: function() {
