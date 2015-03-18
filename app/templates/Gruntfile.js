@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     pkg: pkg,
     connect: {
       options: {
-        port: <%= nodeServerPort %>,
+        port: <%= nodeServerPort %> ,
         hostname: '*', // IP，localhost 或域名
         livereload: siteConfig.livereload //watch 监听的端口,
       },
@@ -59,6 +59,11 @@ module.exports = function(grunt) {
             return middlewares;
           }
         }
+      },
+      dev: {
+        options: {
+          keepalive: true
+        }
       }
     },
     clean: {
@@ -72,10 +77,22 @@ module.exports = function(grunt) {
         src: ['.build']
       }
     },
+    browserify: {
+      page: {
+        expand: true,
+        flatten: true,
+        cwd: 'src/',
+        src: ['pages/**/*.js'],
+        dest: 'build/newtvg_assets/1.0/js/',
+        options: {
+          external: ['jquery'],
+        }
+      }
+    },
     transport: {
       options: {
         paths: ['build/<%= staticAsset %>/<%= projectVersion %>/js/']
-        //alias: pkg.spm.alias
+          //alias: pkg.spm.alias
       },
       src: {
         options: {
@@ -160,7 +177,9 @@ module.exports = function(grunt) {
     cssmin: {
       target: {
         options: {
-          banner: '/* build by grunt cssmin at ' + grunt.template.today("yyyy-mm-dd HH:MM:ss") + ' */'
+          compatibility: 'ie8', //设置兼容模式 
+          noAdvanced: true, //取消高级特性 
+          banner: '/* build by grunt Fep at ' + grunt.template.today("yyyy-mm-dd HH:MM:ss") + ' */'
         },
         files: [{
           expand: true,
@@ -223,7 +242,7 @@ module.exports = function(grunt) {
             match: /(?:\.\.\/){3}<%= staticAsset %>\/<%= projectVersion %>\/js\/[^"']+/ig,
             replacement: function(matchStr) {
               var matchs = matchStr.match(/(.+)(\/.+)(\/.+)/i);
-              return matchs ? ('.'+matchs[3]) : matchStr
+              return matchs ? ('.' + matchs[3]) : matchStr
             }
           }]
         },
@@ -248,7 +267,7 @@ module.exports = function(grunt) {
         }],
         options: {
           pretty: true,
-          data: function(dest, src) {
+          data: function(dest, src, options) {
             return fepUtil.tplData(src[0], siteConfig.static);
           }
         }
@@ -290,21 +309,19 @@ module.exports = function(grunt) {
       },
       <%
       if (htmlTemplete === "ejs") { %>
-          ejs: {
-            files: ['src/**/*.html', 'src/**/*.json'],
-            tasks: ['ejs']
-        },
-        <%
+        ejs: {
+          files: ['src/**/*.html', 'src/**/*.json'],
+          tasks: ['ejs']
+        }, <%
       } else { %>
-          jade: {
-            files: ['src/**/*.jade', 'src/**/*.json'],
-            tasks: ['jade']
-        },
-        <%
+        jade: {
+          files: ['src/**/*.jade', 'src/**/*.json'],
+          tasks: ['jade']
+        }, <%
       } %>
-        stylus: {
-          files: ['**/*.styl'],
-          tasks: ['stylus', 'replace:dist']
+      stylus: {
+        files: ['**/*.styl'],
+        tasks: ['stylus', 'replace:dist']
       },
       copy: {
         files: ['src/**/*.{png,jpg,jpeg,gif}'],
@@ -325,12 +342,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-cmd-transport');
   grunt.loadNpmTasks('grunt-cmd-concat'); <%
   if (htmlTemplete === "ejs") { %>
-      grunt.loadNpmTasks('grunt-fep-ejs'); <%
+    grunt.loadNpmTasks('grunt-fep-ejs'); <%
   } else { %>
-      grunt.loadNpmTasks('grunt-contrib-jade'); <%
+    grunt.loadNpmTasks('grunt-contrib-jade'); <%
   } %>
 
   grunt.event.on('watch', function(action, filepath, target) {
@@ -338,7 +356,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('default', ['connect:server', 'clean:static', 'copy', '<% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>', 'stylus', 'replace:dist', 'watch']);
-  grunt.registerTask('server', ['connect:server','watch:livereload']);
+  grunt.registerTask('server', ['connect:server', 'watch:livereload']);
   grunt.registerTask('build', ['imagemin', 'stylus', 'uglify', 'replace:dist', 'cssmin']);
   grunt.registerTask('zip', ['clean:compress', 'compress']);
   grunt.registerTask('seajs', ['transport', 'concat', 'uglify', 'clean:seajs', 'replace:seajs']);

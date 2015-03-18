@@ -22,6 +22,7 @@
 		"grunt-cmd-transport" : "~0.4.1",
 		"grunt-cmd-concat" : "0.2.2",
 		"fep-util": "~0.0.5",
+		"grunt-browserify": "~3.2.1",
 		<% if(htmlTemplete==="ejs"){ %>
 		"grunt-fep-ejs": "~0.0.1"
 		<%}else{%>
