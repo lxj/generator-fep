@@ -2,9 +2,9 @@
 	"name": "<%= _.slugify(appname) %>",
 	"version": "<%= projectVersion %>",
 	"description": "<%= _.slugify(appname) %>",
-    "engines": {
-        "node": ">=0.10.0"
-    },
+	"engines": {
+		"node": ">=0.10.0"
+	},
 	"devDependencies": {
 		"grunt": "~0.4.5",
 		"grunt-cli":"~0.1.13",
@@ -18,7 +18,8 @@
 		"grunt-contrib-cssmin":"~0.10.0",
 		"grunt-contrib-jshint":"~0.10.0",
 		"grunt-contrib-compress":"~0.11.0",
-        "grunt-replace": "~0.7.9",
+		"blissify": "^1.0.1",
+		"grunt-replace": "~0.7.9",
 		"grunt-cmd-transport" : "~0.4.1",
 		"grunt-cmd-concat" : "0.2.2",
 		"fep-util": "~0.0.5",

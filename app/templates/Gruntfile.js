@@ -1,6 +1,7 @@
 'use strict';
 
 var fepUtil = require('fep-util');
+var blissify = require('blissify');
 
 module.exports = function(grunt) {
 
@@ -34,6 +35,13 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: pkg,
+		site: {
+			assetsPaths: {
+				img: '<%= staticAsset %>/<%=pkg.version%>/img',
+				css: '<%= staticAsset %>/<%=pkg.version%>/css',
+				js: '<%= staticAsset %>/<%=pkg.version%>/js'
+			}
+		},
     connect: {
       options: {
         port: <%= nodeServerPort %> ,
@@ -44,13 +52,24 @@ module.exports = function(grunt) {
         options: {
           open: true, //自动打开网页 http://
           base: './', //主目录
+					rawData: {
+						timestamp: "<%= new Date().getTime() %>",
+						css: '../../../build/<%=site.assetsPaths.css%>',
+						js: '../../../build/<%=site.assetsPaths.js%>',
+						img: '../../../build/<%=site.assetsPaths.img%>',
+						dimg: 'http://10.1.3.17/dummyimage/image.php',
+						siteimg: "<%=site.assetsPaths.img%>",
+						version: "<%=pkg.version %>",
+						ver: '?' + new Date().getTime()
+					},
           middleware: function(connect, options, middlewares) {
             middlewares.unshift(fepUtil.ejsCompile({
               serverOtions: options,
-              data: siteConfig.static,
+              data: options.rawData,
               //defaultData : {grunt:'lllkkkk',img:"http://yuncdn.org/"}
               defaultData: function() {
                 return {
+				  img: this.debug ? '/build/' + options.rawData.siteimg : "../../" + options.rawData.siteimg
                   img: this.debug ? "/build/<%= staticAsset %>/<%= projectVersion %>/img" : siteConfig.build.img
                 }
               }
@@ -83,9 +102,10 @@ module.exports = function(grunt) {
         flatten: true,
         cwd: 'src/',
         src: ['pages/**/*.js'],
-        dest: 'build/newtvg_assets/1.0/js/',
+        dest: 'build/<%= staticAsset %>/<%= projectVersion %>/js/',
         options: {
-          external: ['jquery'],
+			transform:['blissify'],
+			external: ['jquery']
         }
       }
     },
@@ -165,7 +185,7 @@ module.exports = function(grunt) {
         mangle: {
           except: ['jQuery']
         },
-        footer: "\n/**Create by Fep at " + grunt.template.today("yyyymmdd HH:MM:ss") + "**/\n"
+        footer: "\n/**Created by Fep at " + grunt.template.today("yyyymmdd HH:MM:ss") + "**/\n"
       },
       target: {
         files: [{
@@ -179,7 +199,7 @@ module.exports = function(grunt) {
         options: {
           compatibility: 'ie8', //设置兼容模式 
           noAdvanced: true, //取消高级特性 
-          banner: '/* build by grunt Fep at ' + grunt.template.today("yyyy-mm-dd HH:MM:ss") + ' */'
+          banner: '/* builded by grunt Fep at ' + grunt.template.today("yyyy-mm-dd HH:MM:ss") + ' */'
         },
         files: [{
           expand: true,
@@ -212,7 +232,7 @@ module.exports = function(grunt) {
           ext: '.css'
         }],
         options: {
-          banner: "/**Create by Fep at " + grunt.template.today("yyyymmdd HH:MM:ss") + "**/\n",
+          banner: "/**Created by Fep at " + grunt.template.today("yyyymmdd HH:MM:ss") + "**/\n",
           compress: true
         }
       }
@@ -355,7 +375,7 @@ module.exports = function(grunt) {
     grunt.log.writeln(target + ': ' + filepath + ' has ' + action);
   });
 
-  grunt.registerTask('default', ['connect:server', 'clean:static', 'copy', '<% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>', 'stylus', 'replace:dist', 'watch']);
+  grunt.registerTask('default', ['clean:static', 'copy', '<% if(htmlTemplete==="ejs"){ %>ejs<%}else{%>jade<% } %>', 'stylus','browserify:page','uglify', 'replace:dist','connect:server','watch']);
   grunt.registerTask('server', ['connect:server', 'watch:livereload']);
   grunt.registerTask('build', ['imagemin', 'stylus', 'uglify', 'replace:dist', 'cssmin']);
   grunt.registerTask('zip', ['clean:compress', 'compress']);
